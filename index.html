@@ -1130,7 +1130,7 @@ body{
 
     z-index:20;
 
-    top:84%;
+    top:82%;
 
     width:90%;
 
@@ -1267,7 +1267,7 @@ body{
     height:100%;
     object-fit:cover;
     object-position:center center;
-    opacity:.50;
+    opacity: .32;
     filter:brightness(.48) contrast(1.12) saturate(.82);
     transform:scale(1.04);
 }
@@ -1389,6 +1389,22 @@ body{
         font-size:18px;
         line-height:1.68;
         text-align:justify;
+    }
+}
+
+
+/* Zoom lento y casi imperceptible del Tucson durante toda la experiencia */
+.global-tucson-bg img{
+    animation:tucsonSlowZoom 18s ease-in-out infinite alternate;
+    transform-origin:center center;
+}
+
+@keyframes tucsonSlowZoom{
+    0%{
+        transform:scale(1.035);
+    }
+    100%{
+        transform:scale(1.10);
     }
 }
 
@@ -2228,7 +2244,7 @@ function createFinalHeart(){
             Math.max(
                 360,
                 Math.floor(
-                    W * H / 2400
+                    W * H / 2700
                 )
             )
         );
@@ -2270,8 +2286,8 @@ function createFinalHeart(){
         if(inner){
 
             const factor =
-                .45 +
-                Math.random() * .5;
+                .38 +
+                Math.random() * .56;
 
 
             const centerX =
@@ -2308,11 +2324,11 @@ function createFinalHeart(){
 
             targetX:
                 targetX +
-                (Math.random()-.5)*4,
+                (Math.random()-.5)*7,
 
             targetY:
                 targetY +
-                (Math.random()-.5)*4,
+                (Math.random()-.5)*7,
 
             /*
                 ÚNICAMENTE:
@@ -2325,8 +2341,8 @@ function createFinalHeart(){
                 : "Quiero",
 
             size:
-                8 +
-                Math.random()*5,
+                7 +
+                Math.random()*3.5,
 
             delay:
                 Math.random()*1300
@@ -2354,7 +2370,7 @@ function createFinalHeart(){
 
 
         ctx.fillStyle =
-            "rgba(1,4,9,.42)";
+            "rgba(1,4,9,.34)";
 
         ctx.fillRect(
             0,
@@ -2413,8 +2429,11 @@ function createFinalHeart(){
                     .95 * ease;
 
 
+                const wordScale =
+                    particle.text === "Quiero" ? .90 : 1;
+
                 ctx.font =
-                    `700 ${particle.size}px Arial`;
+                    `700 ${particle.size * wordScale}px Arial`;
 
                 ctx.textAlign =
                     "center";
