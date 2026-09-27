@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#020711">
-<title>Para ti 💙</title>
+
+<title>Un detalle para ti 💙</title>
 
 <style>
 *{
@@ -18,8 +18,8 @@ html,body{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#020711;
     font-family:Georgia,"Times New Roman",serif;
+    background:#02050a;
 }
 
 body{
@@ -35,11 +35,11 @@ body{
     inset:0;
     width:100%;
     height:100dvh;
-    overflow:hidden;
     opacity:0;
     visibility:hidden;
     pointer-events:none;
-    transition:opacity 1s ease, visibility 1s ease;
+    transition:opacity .8s ease;
+    overflow:hidden;
 }
 
 .scene.active{
@@ -49,634 +49,935 @@ body{
 }
 
 /* =========================================================
-   ESCENA 1
+   INTRO
 ========================================================= */
 
-#inicio{
+#intro{
     display:flex;
     justify-content:center;
     align-items:center;
     background:
-        radial-gradient(circle at center,rgba(15,65,110,.18),transparent 35%),
-        radial-gradient(circle at 50% 100%,rgba(0,108,255,.08),transparent 45%),
-        #020711;
+        radial-gradient(circle at center,
+        rgba(17,100,155,.25),
+        transparent 38%),
+        linear-gradient(180deg,#010308,#03101c,#010308);
 }
 
-#inicio::before{
-    content:"";
+.speed-lines{
     position:absolute;
-    inset:-30%;
+    inset:-50%;
     background:
         repeating-linear-gradient(
             115deg,
             transparent 0px,
             transparent 80px,
-            rgba(90,190,255,.025) 82px,
-            transparent 84px
+            rgba(89,197,255,.035) 82px,
+            rgba(89,197,255,.035) 85px
         );
-    animation:velocidad 7s linear infinite;
+    animation:speedLines 5s linear infinite;
 }
 
-@keyframes velocidad{
-    from{transform:translateX(-100px)}
-    to{transform:translateX(100px)}
+@keyframes speedLines{
+    from{
+        transform:translateX(-80px);
+    }
+    to{
+        transform:translateX(180px);
+    }
 }
 
 .logo{
     position:relative;
     z-index:5;
-    width:min(88vw,720px);
+    width:min(88vw,760px);
     cursor:pointer;
-    animation:
-        entradaLogo 1.5s cubic-bezier(.18,.8,.2,1),
-        flotarLogo 3s ease-in-out 1.5s infinite;
     filter:
-        drop-shadow(0 0 8px rgba(255,50,30,.55))
-        drop-shadow(0 0 25px rgba(255,215,0,.25));
+        drop-shadow(0 0 10px rgba(255,80,30,.55))
+        drop-shadow(0 0 25px rgba(255,210,0,.25));
+    animation:
+        logoEntrada 1.4s cubic-bezier(.15,.85,.2,1),
+        logoMovimiento 3s 1.4s ease-in-out infinite;
 }
 
-@keyframes entradaLogo{
+@keyframes logoEntrada{
     0%{
         opacity:0;
-        transform:scale(.2) translateX(-100px) rotate(-5deg);
+        transform:translateX(-150px) scale(.25) rotate(-7deg);
     }
-    65%{
+
+    60%{
         opacity:1;
-        transform:scale(1.08) translateX(15px) rotate(1deg);
+        transform:translateX(15px) scale(1.08) rotate(1deg);
     }
+
     100%{
         opacity:1;
-        transform:scale(1) translateX(0) rotate(0);
+        transform:none;
     }
 }
 
-@keyframes flotarLogo{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-8px)}
-}
+@keyframes logoMovimiento{
+    0%,100%{
+        transform:translateY(0);
+    }
 
-.logo::after{
-    content:"";
-    position:absolute;
-    inset:-30px;
-    background:radial-gradient(circle,rgba(255,210,50,.16),transparent 65%);
-    z-index:-1;
+    50%{
+        transform:translateY(-7px);
+    }
 }
 
 /* =========================================================
-   ESCENA 2 - CARGA
+   CARGA
 ========================================================= */
 
-#carga{
+#loading{
+    background:#020812;
     display:flex;
-    align-items:center;
     justify-content:center;
-    background:#030912;
+    align-items:center;
 }
 
-.tucson-bg{
+.tucson-background{
     position:absolute;
     inset:0;
     width:100%;
     height:100%;
     object-fit:cover;
-    opacity:.18;
+    opacity:.20;
     filter:
-        brightness(.42)
+        brightness(.45)
         contrast(1.15)
-        saturate(.65)
+        saturate(.7)
         blur(1px);
-    transform:scale(1.08);
+    transform:scale(1.06);
 }
 
-.carga-overlay{
+.loading-overlay{
     position:absolute;
     inset:0;
     background:
-        radial-gradient(circle at center,transparent 5%,rgba(1,7,15,.35) 50%,rgba(1,5,10,.88) 100%);
+        radial-gradient(
+            circle at center,
+            transparent 5%,
+            rgba(0,0,0,.35) 45%,
+            rgba(0,0,0,.9) 100%
+        );
 }
 
-.carga-contenido{
+.loading-container{
     position:relative;
     z-index:5;
-    width:min(86vw,650px);
+    width:min(88vw,700px);
     text-align:center;
 }
 
-.carga-titulo{
-    font-size:clamp(20px,5vw,34px);
-    color:#e9f7ff;
-    letter-spacing:.06em;
-    margin-bottom:45px;
-    text-shadow:0 0 18px rgba(90,200,255,.45);
+.loading-title{
+    font-size:clamp(18px,5vw,30px);
+    margin-bottom:65px;
+    color:#eefaff;
+    text-shadow:0 0 18px rgba(82,200,255,.6);
 }
 
-.car-carga{
-    position:absolute;
-    width:70px;
-    height:38px;
-    left:0;
-    bottom:23px;
-    z-index:3;
-    transform:translateX(-50%);
-    animation:carCarga 5s linear forwards;
-}
-
-.car-cuerpo{
-    position:absolute;
-    left:5px;
-    bottom:7px;
-    width:60px;
-    height:22px;
-    background:linear-gradient(180deg,#e8edf0,#65717b);
-    border-radius:10px 15px 5px 5px;
-    box-shadow:0 0 10px rgba(150,220,255,.55);
-}
-
-.car-cabina{
-    position:absolute;
-    left:20px;
-    bottom:24px;
-    width:30px;
-    height:16px;
-    background:linear-gradient(135deg,#26343d,#a8c0cc);
-    clip-path:polygon(18% 100%,30% 10%,75% 0,100% 100%);
-}
-
-.rueda{
-    position:absolute;
-    width:13px;
-    height:13px;
-    background:#090c10;
-    border:2px solid #82909a;
-    border-radius:50%;
-    bottom:0;
-}
-
-.rueda.uno{left:12px}
-.rueda.dos{right:9px}
-
-@keyframes carCarga{
-    from{left:0}
-    to{left:100%}
-}
-
-.barra{
+.progress-area{
+    position:relative;
     width:100%;
-    height:14px;
-    border-radius:20px;
-    padding:2px;
-    background:rgba(255,255,255,.1);
-    border:1px solid rgba(120,205,255,.3);
-    box-shadow:0 0 25px rgba(35,150,255,.15);
 }
 
-.barra-progreso{
-    width:0%;
+.progress-track{
+    position:relative;
+    width:100%;
+    height:12px;
+    border-radius:20px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(135,220,255,.35);
+    overflow:visible;
+    box-shadow:
+        0 0 18px rgba(39,160,220,.18),
+        inset 0 0 10px rgba(0,0,0,.5);
+}
+
+.progress-bar{
+    position:absolute;
+    left:0;
+    top:0;
     height:100%;
+    width:0%;
     border-radius:20px;
-    background:linear-gradient(90deg,#197fd2,#7bdcff,#d9f8ff);
-    box-shadow:0 0 15px rgba(80,200,255,.8);
-    animation:cargar 5s linear forwards;
+    background:
+        linear-gradient(
+            90deg,
+            #075996,
+            #25a9ed,
+            #8ee5ff
+        );
+    box-shadow:
+        0 0 10px rgba(79,199,255,.9),
+        0 0 25px rgba(79,199,255,.35);
 }
 
-@keyframes cargar{
-    from{width:0%}
-    to{width:100%}
+/*
+   NUEVO CARRO:
+   Cambia "hotwheels.png" por el nombre del PNG que
+   vayas a colocar en la carpeta.
+*/
+.loading-car{
+    position:absolute;
+    z-index:10;
+
+    /*
+       El centro del carro queda exactamente encima
+       del porcentaje de la barra.
+    */
+    left:0%;
+    top:50%;
+
+    width:95px;
+    height:auto;
+
+    transform:
+        translate(-50%,-50%);
+
+    filter:
+        drop-shadow(0 5px 6px rgba(0,0,0,.65))
+        drop-shadow(0 0 8px rgba(73,190,255,.35));
+
+    pointer-events:none;
 }
 
-.porcentaje{
-    margin-top:22px;
+.percent{
+    margin-top:25px;
+    font-family:Arial,sans-serif;
     font-size:32px;
-    color:#8cddff;
-    text-shadow:0 0 15px rgba(65,190,255,.7);
+    font-weight:bold;
+    color:#b9ebff;
+    text-shadow:
+        0 0 10px rgba(67,194,255,.8),
+        0 0 25px rgba(67,194,255,.35);
 }
 
 /* =========================================================
-   ESCENA 3 - RAMO
+   RAMO
 ========================================================= */
 
-#ramo{
+#gift{
     background:
-        radial-gradient(circle at 50% 15%,#238ac1 0%,#075083 38%,#021d3c 100%);
+        radial-gradient(
+            circle at 50% 18%,
+            rgba(89,188,231,.35),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #0a527e,
+            #063b61 50%,
+            #021827
+        );
 }
 
-#ramo::before{
-    content:"";
+.gift-title{
     position:absolute;
-    inset:0;
-    background:
-        radial-gradient(circle at 20% 20%,rgba(255,255,255,.12),transparent 4%),
-        radial-gradient(circle at 80% 35%,rgba(255,255,255,.1),transparent 3%),
-        radial-gradient(circle at 50% 80%,rgba(255,255,255,.08),transparent 4%);
-}
-
-.titulo-ramo{
-    position:absolute;
-    z-index:20;
-    top:6vh;
+    z-index:50;
+    top:5vh;
+    left:0;
     width:100%;
     text-align:center;
-    font-size:clamp(27px,7vw,52px);
+
+    font-size:clamp(26px,7vw,50px);
+
     color:#f5fbff;
+
     text-shadow:
-        0 0 12px rgba(90,200,255,.8),
-        0 3px 12px rgba(0,0,0,.5);
-    animation:aparecerTitulo 1s ease forwards;
+        0 0 12px rgba(111,210,255,.7),
+        0 0 30px rgba(80,190,255,.25);
+
+    animation:titleAppear 1s ease forwards;
 }
 
-@keyframes aparecerTitulo{
+@keyframes titleAppear{
     from{
         opacity:0;
         transform:translateY(-25px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
 
-.ramo-contenedor{
+/* ---------- RAMO COMPLETO ---------- */
+
+.bouquet{
     position:absolute;
-    width:min(90vw,600px);
-    height:70vh;
     left:50%;
-    top:15%;
+    top:16%;
+    width:min(94vw,650px);
+    height:72vh;
+
+    transform:
+        translateX(-50%)
+        rotate(-1deg);
+
+    transform-origin:center bottom;
+
+    animation:
+        bouquetMovement 5s ease-in-out infinite;
+}
+
+@keyframes bouquetMovement{
+
+    0%,100%{
+        transform:
+            translateX(-50%)
+            rotate(-1deg);
+    }
+
+    50%{
+        transform:
+            translateX(-50%)
+            rotate(1.2deg);
+    }
+}
+
+/* Papel */
+
+.wrapper{
+    position:absolute;
+    z-index:25;
+
+    left:50%;
+    bottom:4%;
+
+    width:min(52vw,300px);
+    height:220px;
+
     transform:translateX(-50%);
+}
+
+.paper{
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            110deg,
+            #8dcde5,
+            #e9f9ff 45%,
+            #70b6d3
+        );
+
+    clip-path:
+        polygon(
+            8% 0,
+            92% 0,
+            100% 100%,
+            0 100%
+        );
+
+    box-shadow:
+        0 20px 30px rgba(0,0,0,.35);
+}
+
+/* Pliegues del papel */
+
+.paper::before,
+.paper::after{
+    content:"";
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:2px;
+
+    background:rgba(255,255,255,.28);
+}
+
+.paper::before{
+    left:30%;
+    transform:rotate(4deg);
+}
+
+.paper::after{
+    right:30%;
+    transform:rotate(-4deg);
+}
+
+/* Lazo */
+
+.ribbon{
+    position:absolute;
+    z-index:30;
+
+    left:50%;
+    bottom:45px;
+
+    width:100%;
+    height:28px;
+
+    transform:
+        translateX(-50%)
+        rotate(-3deg);
+
+    background:
+        linear-gradient(
+            #266d92,
+            #bcecff,
+            #266d92
+        );
+
+    box-shadow:
+        0 5px 12px rgba(0,0,0,.3);
+}
+
+.ribbon::before,
+.ribbon::after{
+    content:"";
+    position:absolute;
+
+    top:20px;
+
+    width:75px;
+    height:65px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #62a9c7,
+            #d8f5ff,
+            #4388a9
+        );
+}
+
+.ribbon::before{
+    left:-8px;
+    clip-path:
+        polygon(
+            100% 0,
+            100% 70%,
+            0 100%,
+            25% 35%
+        );
+}
+
+.ribbon::after{
+    right:-8px;
+    clip-path:
+        polygon(
+            0 0,
+            100% 35%,
+            100% 100%,
+            0 70%
+        );
+}
+
+/* ---------- ROSAS AZULES ---------- */
+
+.rose{
+    position:absolute;
+    z-index:20;
+
+    width:70px;
+    height:70px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #e9fbff 0%,
+            #7edcff 15%,
+            #258ec4 38%,
+            #07517d 68%,
+            #032d4d 100%
+        );
+
+    box-shadow:
+        0 0 12px rgba(86,202,255,.5);
+
+    animation:
+        roseAppear .9s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.rose::before,
+.rose::after{
+    content:"";
+    position:absolute;
+    inset:9px;
+
+    border-radius:50%;
+
+    border:
+        5px solid rgba(214,247,255,.45);
+
+    transform:rotate(25deg);
+}
+
+.rose::after{
+    inset:17px;
+    transform:rotate(-25deg);
+}
+
+@keyframes roseAppear{
+    from{
+        opacity:0;
+        transform:
+            translateY(100px)
+            scale(.2);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+/* posiciones de las rosas */
+
+.r1{
+    left:8%;
+    top:11%;
+    animation-delay:.2s;
+}
+
+.r2{
+    left:27%;
+    top:3%;
+    animation-delay:.35s;
+}
+
+.r3{
+    left:48%;
+    top:0%;
+    animation-delay:.5s;
+}
+
+.r4{
+    left:68%;
+    top:7%;
+    animation-delay:.65s;
+}
+
+.r5{
+    left:83%;
+    top:20%;
+    animation-delay:.8s;
+}
+
+.r6{
+    left:18%;
+    top:29%;
+    animation-delay:.95s;
 }
 
 /* tallos */
 
-.tallo{
-    position:absolute;
-    width:4px;
-    height:48%;
-    left:50%;
-    bottom:17%;
-    background:linear-gradient(#79d9ff,#236d8d);
-    transform-origin:bottom;
-    box-shadow:0 0 5px rgba(100,220,255,.5);
-}
-
-.tallo:nth-child(1){transform:rotate(-25deg)}
-.tallo:nth-child(2){transform:rotate(-16deg)}
-.tallo:nth-child(3){transform:rotate(-8deg)}
-.tallo:nth-child(4){transform:rotate(0deg)}
-.tallo:nth-child(5){transform:rotate(8deg)}
-.tallo:nth-child(6){transform:rotate(16deg)}
-.tallo:nth-child(7){transform:rotate(25deg)}
-
-/* carros del ramo */
-
-.mini-car{
-    position:absolute;
-    width:105px;
-    height:55px;
-    opacity:0;
-    transform:translateY(100px) scale(.3);
-    animation:carroRamo 1.2s cubic-bezier(.2,.8,.2,1) forwards;
-    filter:drop-shadow(0 9px 9px rgba(0,0,0,.5));
-}
-
-.mini-car::before{
-    content:"";
-    position:absolute;
-    left:12px;
-    bottom:10px;
-    width:82px;
-    height:28px;
-    background:linear-gradient(145deg,#f3f3f3,#6b7278);
-    border-radius:12px 25px 8px 7px;
-    border:2px solid rgba(255,255,255,.5);
-}
-
-.mini-car::after{
-    content:"";
-    position:absolute;
-    left:29px;
-    bottom:31px;
-    width:43px;
-    height:20px;
-    background:linear-gradient(135deg,#182934,#6da1bb);
-    clip-path:polygon(15% 100%,28% 5%,78% 0,100% 100%);
-}
-
-.mini-car .rueda1,
-.mini-car .rueda2{
-    position:absolute;
-    bottom:4px;
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    background:#080a0d;
-    border:3px solid #aaa;
-    z-index:3;
-}
-
-.mini-car .rueda1{left:19px}
-.mini-car .rueda2{right:15px}
-
-.mini-car .hot{
+.stem{
     position:absolute;
     z-index:5;
-    left:37px;
-    bottom:18px;
-    font-family:Arial,sans-serif;
-    font-size:7px;
-    font-weight:bold;
-    color:#ffdd00;
-    transform:rotate(-5deg);
+
+    left:50%;
+    bottom:15%;
+
+    width:4px;
+    height:55%;
+
+    background:
+        linear-gradient(
+            #74d9a0,
+            #176746
+        );
+
+    transform-origin:bottom;
 }
 
-.car1{left:5%;top:12%;transform:rotate(-18deg);animation-delay:.15s}
-.car2{left:27%;top:4%;transform:rotate(-8deg);animation-delay:.3s}
-.car3{left:48%;top:1%;transform:rotate(4deg);animation-delay:.45s}
-.car4{left:68%;top:10%;transform:rotate(15deg);animation-delay:.6s}
-.car5{left:13%;top:27%;transform:rotate(-13deg);animation-delay:.75s}
-.car6{left:39%;top:22%;transform:rotate(3deg);animation-delay:.9s}
-.car7{left:62%;top:27%;transform:rotate(14deg);animation-delay:1.05s}
+.s1{transform:rotate(-30deg)}
+.s2{transform:rotate(-20deg)}
+.s3{transform:rotate(-10deg)}
+.s4{transform:rotate(0)}
+.s5{transform:rotate(10deg)}
+.s6{transform:rotate(22deg)}
 
-@keyframes carroRamo{
-    0%{
+/* ---------- CARROS PNG ---------- */
+
+/*
+   Coloca tus imágenes en la misma carpeta:
+
+   carro1.png
+   carro2.png
+   carro3.png
+   carro4.png
+   carro5.png
+   carro6.png
+
+   Puedes cambiar los nombres directamente aquí.
+*/
+
+.hotwheel{
+    position:absolute;
+    z-index:18;
+
+    width:105px;
+    height:auto;
+
+    filter:
+        drop-shadow(0 8px 7px rgba(0,0,0,.55));
+
+    opacity:0;
+
+    animation:
+        carAppear 1s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes carAppear{
+    from{
         opacity:0;
-        transform:translateY(150px) scale(.2) rotate(0);
+        transform:
+            translateY(120px)
+            scale(.3)
+            rotate(-10deg);
     }
-    65%{
+
+    70%{
         opacity:1;
-        transform:translateY(-8px) scale(1.05) rotate(var(--r,0deg));
+        transform:
+            translateY(-8px)
+            scale(1.05)
+            rotate(2deg);
     }
-    100%{
+
+    to{
         opacity:1;
-        transform:translateY(0) scale(1) rotate(var(--r,0deg));
+        transform:
+            translateY(0)
+            scale(1)
+            rotate(0);
     }
 }
 
-.cinta{
-    position:absolute;
-    left:50%;
-    bottom:10%;
-    transform:translateX(-50%);
-    width:145px;
-    height:95px;
-    background:linear-gradient(90deg,#164d73,#72c7ee,#164d73);
-    clip-path:polygon(0 0,100% 0,82% 100%,50% 75%,18% 100%);
-    z-index:15;
-    box-shadow:0 5px 20px rgba(0,0,0,.4);
+.car1{
+    left:0%;
+    top:18%;
+    animation-delay:.8s;
+    transform:rotate(-18deg);
 }
 
-.boton-carta{
+.car2{
+    left:23%;
+    top:12%;
+    animation-delay:1s;
+    transform:rotate(-8deg);
+}
+
+.car3{
+    left:47%;
+    top:9%;
+    animation-delay:1.2s;
+    transform:rotate(5deg);
+}
+
+.car4{
+    left:69%;
+    top:16%;
+    animation-delay:1.4s;
+    transform:rotate(15deg);
+}
+
+.car5{
+    left:12%;
+    top:34%;
+    animation-delay:1.6s;
+    transform:rotate(-14deg);
+}
+
+.car6{
+    left:57%;
+    top:31%;
+    animation-delay:1.8s;
+    transform:rotate(13deg);
+}
+
+/* Botón */
+
+.open-letter{
     position:absolute;
-    z-index:30;
-    bottom:5vh;
+    z-index:100;
+
     left:50%;
+    bottom:3vh;
+
     transform:translateX(-50%);
-    border:1px solid rgba(210,245,255,.8);
-    background:rgba(2,25,48,.8);
-    color:white;
-    padding:15px 32px;
+
+    padding:15px 30px;
+
     border-radius:50px;
-    letter-spacing:.16em;
-    font-size:14px;
-    box-shadow:0 0 25px rgba(100,210,255,.35);
-    animation:botonPulso 1.7s ease-in-out infinite;
+
+    border:
+        1px solid rgba(220,248,255,.8);
+
+    background:
+        rgba(3,25,45,.8);
+
+    color:white;
+
+    font-weight:bold;
+    letter-spacing:.12em;
+
+    box-shadow:
+        0 0 25px rgba(71,190,255,.35);
+
+    animation:buttonPulse 1.8s ease-in-out infinite;
 }
 
-@keyframes botonPulso{
-    0%,100%{transform:translateX(-50%) scale(1)}
-    50%{transform:translateX(-50%) scale(1.06)}
+@keyframes buttonPulse{
+    50%{
+        transform:
+            translateX(-50%)
+            scale(1.06);
+    }
 }
 
 /* =========================================================
-   ESCENA CARTA
+   CARTA
 ========================================================= */
 
-#carta{
+#letter{
     display:flex;
-    align-items:center;
     justify-content:center;
-    padding:20px;
+    align-items:center;
+
+    padding:18px;
+
     background:
-        radial-gradient(circle at 50% 20%,#165e85,#061b2c 55%,#020711);
+        radial-gradient(
+            circle at 50% 15%,
+            #176081,
+            #061d2d 60%,
+            #02060b
+        );
 }
 
-.carta{
-    width:min(92vw,680px);
-    max-height:88vh;
-    overflow-y:auto;
-    position:relative;
-    padding:48px 34px 35px;
+.paper-letter{
+    width:min(93vw,700px);
+    max-height:90vh;
+    overflow:auto;
+
+    padding:45px 32px 35px;
+
+    color:#293640;
+
     background:
-        linear-gradient(90deg,rgba(0,0,0,.025) 1px,transparent 1px),
-        linear-gradient(#fffdf7,#f0e6d1);
-    color:#26333d;
-    border-radius:5px;
+        linear-gradient(
+            100deg,
+            #eee3d0,
+            #fffdf8 45%,
+            #eee1ca
+        );
+
     box-shadow:
-        0 30px 80px rgba(0,0,0,.65),
-        0 0 40px rgba(100,205,255,.2);
-    transform:scale(.5) rotateX(30deg);
+        0 28px 80px rgba(0,0,0,.65);
+
+    transform:
+        scale(.65)
+        rotateX(20deg);
+
     opacity:0;
-    animation:abrirCarta 1.1s cubic-bezier(.15,.8,.2,1) forwards;
+
+    animation:
+        letterIn 1s cubic-bezier(.15,.85,.2,1)
+        forwards;
 }
 
-@keyframes abrirCarta{
+@keyframes letterIn{
     to{
         opacity:1;
-        transform:scale(1) rotateX(0);
+        transform:none;
     }
 }
 
-.carta::before{
+.paper-letter::before{
     content:"";
+
     position:absolute;
     inset:14px;
-    border:1px solid rgba(100,80,50,.2);
+
+    border:
+        1px solid rgba(100,75,40,.2);
+
     pointer-events:none;
 }
 
-.carta-titulo{
-    position:relative;
+.paper-letter h2{
     text-align:center;
-    color:#1f5877;
-    font-size:clamp(27px,7vw,40px);
-    margin-bottom:28px;
+
+    color:#1d5879;
+
+    font-size:
+        clamp(28px,7vw,40px);
+
+    margin-bottom:25px;
 }
 
-.carta-texto{
-    position:relative;
-    white-space:pre-line;
-    font-size:clamp(17px,4.4vw,21px);
+.letter-text{
+    font-size:
+        clamp(17px,4.5vw,21px);
+
     line-height:1.8;
+
+    white-space:pre-line;
 }
 
-.firma{
-    position:relative;
+.signature{
     margin-top:28px;
+
     text-align:right;
-    color:#286c91;
-    font-size:24px;
+
+    color:#286b8f;
+
+    font-size:25px;
+
     font-style:italic;
 }
 
-.cerrar{
-    position:relative;
+.close-letter{
     display:block;
+
     margin:30px auto 0;
+
     padding:13px 25px;
+
+    border:
+        1px solid #6c9bb1;
+
     border-radius:50px;
-    border:1px solid #5c91ac;
-    background:#173d56;
+
+    background:#163e58;
+
     color:white;
-    cursor:pointer;
-    box-shadow:0 7px 20px rgba(0,0,0,.2);
 }
 
 /* =========================================================
    CORAZÓN FINAL
 ========================================================= */
 
-#final{
-    background:#01050a;
+#heart{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#01040a;
 }
 
-.corazon-svg{
+#heartCanvas{
     position:absolute;
     inset:0;
+
     width:100%;
     height:100%;
 }
 
-.corazon-linea{
-    fill:none;
-    stroke:#48bfff;
-    stroke-width:2;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    stroke-dasharray:2400;
-    stroke-dashoffset:2400;
-    filter:
-        drop-shadow(0 0 5px #45c4ff)
-        drop-shadow(0 0 18px rgba(50,190,255,.7));
-    animation:dibujarCorazon 4s ease forwards;
-}
-
-@keyframes dibujarCorazon{
-    to{stroke-dashoffset:0}
-}
-
-.frases-corazon{
+.final-message{
     position:absolute;
-    inset:0;
-    z-index:5;
-}
 
-.frase{
-    position:absolute;
-    left:50%;
-    top:50%;
-    color:#e8f9ff;
-    font-weight:bold;
-    font-size:clamp(12px,3.2vw,19px);
-    white-space:nowrap;
-    opacity:0;
-    transform:
-        translate(-50%,-50%)
-        translate(
-            calc((var(--sx) - 50vw)),
-            calc((var(--sy) - 50vh))
-        )
-        scale(.2);
-    text-shadow:
-        0 0 7px #43bdff,
-        0 0 16px rgba(50,180,255,.8);
-    animation:formarFrase 2.8s cubic-bezier(.2,.8,.2,1) var(--delay) forwards;
-}
-
-@keyframes formarFrase{
-    0%{
-        opacity:0;
-        transform:
-            translate(-50%,-50%)
-            translate(calc((var(--sx) - 50vw)),calc((var(--sy) - 50vh)))
-            scale(.2)
-            rotate(var(--rot));
-    }
-    35%{
-        opacity:1;
-    }
-    100%{
-        opacity:1;
-        transform:
-            translate(-50%,-50%)
-            translate(calc((var(--ex) - 50vw)),calc((var(--ey) - 50vh)))
-            scale(1)
-            rotate(0);
-    }
-}
-
-.mensaje-final{
-    position:absolute;
     z-index:10;
-    left:50%;
-    top:83%;
-    transform:translate(-50%,30px);
+
+    top:84%;
+
     width:90%;
+
     text-align:center;
-    color:#bceaff;
-    font-size:clamp(16px,4.5vw,25px);
+
+    color:#bdeaff;
+
+    font-size:
+        clamp(16px,4.4vw,25px);
+
+    text-shadow:
+        0 0 14px rgba(71,190,255,.75);
+
     opacity:0;
-    animation:mensajeFinal 1.5s 5.5s ease forwards;
-    text-shadow:0 0 15px rgba(70,190,255,.7);
+
+    animation:
+        finalMessage 1.2s 5.5s forwards;
 }
 
-@keyframes mensajeFinal{
+@keyframes finalMessage{
     to{
         opacity:1;
-        transform:translate(-50%,0);
     }
 }
 
 /* =========================================================
-   MUSICA
+   MÚSICA
 ========================================================= */
 
-.musica{
+.music-button{
     position:fixed;
-    z-index:100;
+
     right:14px;
     bottom:14px;
+
+    z-index:500;
+
     width:42px;
     height:42px;
-    border-radius:50%;
-    border:1px solid rgba(130,215,255,.5);
-    background:rgba(3,15,28,.8);
-    color:white;
+
     display:none;
-    align-items:center;
+
     justify-content:center;
+    align-items:center;
+
+    border-radius:50%;
+
+    border:
+        1px solid rgba(130,215,255,.55);
+
+    background:
+        rgba(3,14,27,.78);
+
+    color:white;
 }
 
-.musica.visible{
+.music-button.visible{
     display:flex;
 }
 
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
 @media(max-width:600px){
 
-    .ramo-contenedor{
+    .loading-car{
+        width:75px;
+    }
+
+    .loading-title{
+        margin-bottom:58px;
+    }
+
+    .bouquet{
         top:17%;
-        height:65vh;
+        height:69vh;
     }
 
-    .mini-car{
-        width:80px;
-        transform:scale(.8);
+    .rose{
+        width:55px;
+        height:55px;
     }
 
-    .carta{
-        padding:42px 27px 30px;
+    .hotwheel{
+        width:82px;
     }
 
-    .carta-texto{
-        line-height:1.7;
+    .wrapper{
+        width:55vw;
+        height:190px;
+    }
+
+    .paper-letter{
+        padding:
+            40px 25px 30px;
     }
 }
 </style>
@@ -686,89 +987,81 @@ body{
 
 <!-- =====================================================
      ESCENA 1
-====================================================== -->
+===================================================== -->
 
-<section id="inicio" class="scene active">
+<section id="intro" class="scene active">
+
+    <div class="speed-lines"></div>
 
     <!--
-        Si quieres utilizar exactamente tu logo,
-        reemplaza el contenido de este SVG por tu imagen
-        o coloca el logo como archivo local.
+        Cambia logo.png por el nombre de tu logo si lo deseas.
     -->
-
-    <svg
+    <img
+        src="logo.png"
         class="logo"
         id="logo"
-        viewBox="0 0 900 330"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-label="Hot Wheels">
-
-        <path
-            d="M20 180
-               C110 280 205 270 290 225
-               C430 150 600 75 840 100
-               C790 48 690 25 560 43
-               C410 64 270 104 150 105
-               C100 105 60 90 20 55
-               C50 120 105 145 170 145
-               C120 160 75 175 20 180Z"
-            fill="#ed171f"/>
-
-        <text
-            x="170"
-            y="205"
-            fill="#ffe900"
-            font-family="Arial Black,Arial,sans-serif"
-            font-size="120"
-            font-weight="900"
-            font-style="italic"
-            transform="skewX(-10)">
-            HOT WHEELS
-        </text>
-    </svg>
+        alt="Hot Wheels"
+    >
 
 </section>
 
 
 <!-- =====================================================
-     ESCENA 2
-====================================================== -->
+     ESCENA 2 — CARGA
+===================================================== -->
 
-<section id="carga" class="scene">
+<section id="loading" class="scene">
 
     <img
-        class="tucson-bg"
         src="tucson.png"
-        alt="Hyundai Tucson 2015">
+        class="tucson-background"
+        alt="Hyundai Tucson 2015"
+    >
 
-    <div class="carga-overlay"></div>
+    <div class="loading-overlay"></div>
 
-    <div class="carga-contenido">
+    <div class="loading-container">
 
-        <div class="carga-titulo">
-            Preparando tu sorpresa...
+        <div class="loading-title">
+            Preparando una sorpresa para ti...
         </div>
 
-        <div style="position:relative">
+        <div class="progress-area">
 
-            <div class="car-carga">
+            <div class="progress-track">
 
-                <div class="car-cuerpo"></div>
+                <div
+                    class="progress-bar"
+                    id="progressBar">
+                </div>
 
-                <div class="car-cabina"></div>
+                <!--
+                    ESTE ES EL NUEVO CARRO.
 
-                <div class="rueda uno"></div>
-                <div class="rueda dos"></div>
+                    Coloca aquí el PNG que quieras utilizar.
+                    Por ejemplo:
+
+                    hotwheels.png
+
+                    o
+
+                    carro-carga.png
+                -->
+
+                <img
+                    src="hotwheels.png"
+                    class="loading-car"
+                    id="loadingCar"
+                    alt="Hot Wheels"
+                >
 
             </div>
 
-            <div class="barra">
-                <div class="barra-progreso"></div>
-            </div>
-
         </div>
 
-        <div class="porcentaje" id="porcentaje">
+        <div
+            class="percent"
+            id="percent">
             1%
         </div>
 
@@ -778,160 +1071,156 @@ body{
 
 
 <!-- =====================================================
-     ESCENA 3
-====================================================== -->
+     ESCENA 3 — RAMO
+===================================================== -->
 
-<section id="ramo" class="scene">
+<section id="gift" class="scene">
 
-    <h1 class="titulo-ramo">
+    <h1 class="gift-title">
         Feliz 30 de septiembre 💙
     </h1>
 
-    <div class="ramo-contenedor">
+    <div class="bouquet">
 
         <!-- Tallos -->
 
-        <div class="tallo"></div>
-        <div class="tallo"></div>
-        <div class="tallo"></div>
-        <div class="tallo"></div>
-        <div class="tallo"></div>
-        <div class="tallo"></div>
-        <div class="tallo"></div>
+        <div class="stem s1"></div>
+        <div class="stem s2"></div>
+        <div class="stem s3"></div>
+        <div class="stem s4"></div>
+        <div class="stem s5"></div>
+        <div class="stem s6"></div>
 
 
-        <!-- Carro 1 -->
+        <!-- ROSAS AZULES -->
 
-        <div class="mini-car car1">
-            <div class="rueda1"></div>
-            <div class="rueda2"></div>
-            <span class="hot">HOT WHEELS</span>
+        <div class="rose r1"></div>
+        <div class="rose r2"></div>
+        <div class="rose r3"></div>
+        <div class="rose r4"></div>
+        <div class="rose r5"></div>
+        <div class="rose r6"></div>
+
+
+        <!-- =================================================
+             TUS CARROS
+
+             Cambia únicamente los nombres de los archivos.
+        ================================================== -->
+
+        <img
+            src="carro1.png"
+            class="hotwheel car1"
+            alt="Hot Wheels"
+        >
+
+        <img
+            src="carro2.png"
+            class="hotwheel car2"
+            alt="Hot Wheels"
+        >
+
+        <img
+            src="carro3.png"
+            class="hotwheel car3"
+            alt="Hot Wheels"
+        >
+
+        <img
+            src="carro4.png"
+            class="hotwheel car4"
+            alt="Hot Wheels"
+        >
+
+        <img
+            src="carro5.png"
+            class="hotwheel car5"
+            alt="Hot Wheels"
+        >
+
+        <img
+            src="carro6.png"
+            class="hotwheel car6"
+            alt="Hot Wheels"
+        >
+
+
+        <!-- PAPEL DEL RAMO -->
+
+        <div class="wrapper">
+
+            <div class="paper"></div>
+
+            <div class="ribbon"></div>
+
         </div>
-
-
-        <!-- Carro 2 -->
-
-        <div class="mini-car car2">
-            <div class="rueda1"></div>
-            <div class="rueda2"></div>
-            <span class="hot">HOT WHEELS</span>
-        </div>
-
-
-        <!-- Carro 3 -->
-
-        <div class="mini-car car3">
-            <div class="rueda1"></div>
-            <div class="rueda2"></div>
-            <span class="hot">HOT WHEELS</span>
-        </div>
-
-
-        <!-- Carro 4 -->
-
-        <div class="mini-car car4">
-            <div class="rueda1"></div>
-            <div class="rueda2"></div>
-            <span class="hot">HOT WHEELS</span>
-        </div>
-
-
-        <!-- Carro 5 -->
-
-        <div class="mini-car car5">
-            <div class="rueda1"></div>
-            <div class="rueda2"></div>
-            <span class="hot">HOT WHEELS</span>
-        </div>
-
-
-        <!-- Carro 6 -->
-
-        <div class="mini-car car6">
-            <div class="rueda1"></div>
-            <div class="rueda2"></div>
-            <span class="hot">HOT WHEELS</span>
-        </div>
-
-
-        <!-- Carro 7 -->
-
-        <div class="mini-car car7">
-            <div class="rueda1"></div>
-            <div class="rueda2"></div>
-            <span class="hot">HOT WHEELS</span>
-        </div>
-
-
-        <div class="cinta"></div>
 
     </div>
 
 
-    <button class="boton-carta" id="abrirCarta">
+    <button
+        class="open-letter"
+        id="openLetter">
+
         ABRIR MI CARTA 💙
+
     </button>
 
 </section>
 
 
 <!-- =====================================================
-     ESCENA 4 - CARTA
-====================================================== -->
+     CARTA
+===================================================== -->
 
-<section id="carta" class="scene">
+<section id="letter" class="scene">
 
-    <article class="carta">
+    <article class="paper-letter">
 
-        <h2 class="carta-titulo">
+        <h2>
             Para alguien muy especial 💙
         </h2>
 
-        <!--
-            PUEDES CAMBIAR FÁCILMENTE TODO EL TEXTO
-            DE ESTA CARTA DESDE AQUÍ.
-        -->
-
-        <div class="carta-texto">
+        <div class="letter-text">
 
 Hoy quería regalarte algo diferente.
 
-No quería que fuera simplemente un regalo más, sino algo que tuviera un pequeño significado, algo que pudiera sorprenderte y, sobre todo, sacarte una sonrisa.
+No quería que fuera simplemente un regalo más. Quería preparar algo que tuviera una pequeña historia, algo que comenzara de una manera inesperada y que terminara dejando una sonrisa.
 
-Tal vez no sea el regalo más grande del mundo, pero está hecho pensando en ti y en esos pequeños detalles que hacen que una persona sea especial.
+Pensé en todos esos pequeños detalles que hacen especial a una persona y quise convertir uno de ellos en este pequeño regalo.
 
-Por eso quise juntar algunas cosas que me parecieron perfectas para este momento: algo relacionado con los carros, algo diferente y divertido, y una pequeña sorpresa que espero que puedas guardar con cariño.
+Por eso aparece este ramo diferente. En lugar de ser un ramo tradicional, quise hacerlo de una manera especial, mezclando algo que representa diversión, recuerdos y cariño.
 
 Feliz 30 de septiembre. 💙
 
-Espero que este día esté lleno de momentos bonitos, de sonrisas sinceras y de personas que te recuerden lo importante y especial que eres.
+Espero que este día te regale muchos motivos para sonreír, momentos que quieras recordar y personas que sepan valorar todo lo bueno que llevas contigo.
 
-Quiero que cuando vuelvas a ver este pequeño detalle recuerdes que detrás de él hubo alguien que dedicó tiempo, imaginación y cariño para intentar hacerte sentir especial.
+Puede parecer un detalle sencillo, pero detrás de él hay tiempo, imaginación y mucho cariño. Cada parte fue pensada para que no fuera solamente algo que vieras durante unos segundos, sino una pequeña experiencia que pudieras recordar.
 
-Quizás un ramo normalmente lleva flores, pero este ramo lleva algo diferente: pequeños carros Hot Wheels, porque a veces los mejores detalles son justamente aquellos que salen de lo común.
+Quería que al abrir esta carta supieras que eres una persona especial y que, aunque muchas veces no hacen falta grandes palabras para demostrarlo, hay ocasiones en las que vale la pena detenerse un momento y decirlo.
 
-Y aunque parezca algo sencillo, cada parte de esta pequeña historia fue pensada para llegar hasta este momento.
+Gracias por ser tú.
 
-Gracias por tomarte el tiempo de abrirlo.
+Gracias por cada sonrisa, por cada conversación, por cada momento compartido y por todas esas pequeñas cosas que quizá parecen normales, pero que terminan teniendo un significado especial.
 
-Gracias por llegar hasta aquí.
+Ojalá este pequeño detalle pueda acompañar este día y, sobre todo, pueda sacarte una sonrisa.
 
-Y gracias por ser esa persona que hace que un pequeño detalle pueda tener un significado mucho más grande.
+Feliz 30 de septiembre. 💙
 
-Espero sinceramente que esto te saque una sonrisa.
-
-Que tengas un hermoso 30 de septiembre. 💙
-
-Con mucho cariño,
+Y si algún día vuelves a ver esta pequeña historia, espero que recuerdes que fue hecha pensando en ti.
 
         </div>
 
-        <div class="firma">
-            Para ti, con cariño ✨
+        <div class="signature">
+            Con mucho cariño ✨
         </div>
 
-        <button class="cerrar" id="cerrarCarta">
+        <button
+            class="close-letter"
+            id="closeLetter">
+
             Un último detalle para ti 💙
+
         </button>
 
     </article>
@@ -940,134 +1229,37 @@ Con mucho cariño,
 
 
 <!-- =====================================================
-     ESCENA 5 - CORAZÓN
-====================================================== -->
+     CORAZÓN FINAL
+===================================================== -->
 
-<section id="final" class="scene">
+<section id="heart" class="scene">
 
-    <!-- Corazón luminoso -->
+    <canvas id="heartCanvas"></canvas>
 
-    <svg
-        class="corazon-svg"
-        viewBox="0 0 600 600"
-        preserveAspectRatio="xMidYMid meet">
+    <div class="final-message">
 
-        <path
-            class="corazon-linea"
-            d="
-            M300 520
-            C275 490 80 365 80 190
-            C80 95 190 55 250 125
-            C275 155 300 190 300 190
-            C300 190 325 155 350 125
-            C410 55 520 95 520 190
-            C520 365 325 490 300 520
-            Z
-            "
-        />
+        Porque algunos detalles se hacen con las manos,
+        pero otros se hacen con el corazón. 💙
 
-    </svg>
-
-
-    <!--
-        LAS FRASES COMIENZAN DISPERSAS
-        Y TERMINAN FORMANDO EL CORAZÓN.
-    -->
-
-    <div class="frases-corazon">
-
-        <span class="frase"
-              style="--sx:12vw;--sy:20vh;--ex:300px;--ey:155px;--delay:.2s;--rot:-5deg">
-            para ti
-        </span>
-
-        <span class="frase"
-              style="--sx:80vw;--sy:15vh;--ex:350px;--ey:155px;--delay:.35s;--rot:8deg">
-            con cariño
-        </span>
-
-        <span class="frase"
-              style="--sx:20vw;--sy:75vh;--ex:205px;--ey:215px;--delay:.5s;--rot:-3deg">
-            eres especial
-        </span>
-
-        <span class="frase"
-              style="--sx:82vw;--sy:70vh;--ex:395px;--ey:215px;--delay:.65s;--rot:4deg">
-            feliz día
-        </span>
-
-        <span class="frase"
-              style="--sx:10vw;--sy:45vh;--ex:150px;--ey:270px;--delay:.8s;--rot:-8deg">
-            sonríe
-        </span>
-
-        <span class="frase"
-              style="--sx:90vw;--sy:48vh;--ex:450px;--ey:270px;--delay:.95s;--rot:6deg">
-            gracias
-        </span>
-
-        <span class="frase"
-              style="--sx:25vw;--sy:15vh;--ex:175px;--ey:320px;--delay:1.1s;--rot:-4deg">
-            30 de septiembre
-        </span>
-
-        <span class="frase"
-              style="--sx:75vw;--sy:85vh;--ex:425px;--ey:320px;--delay:1.25s;--rot:5deg">
-            💙
-        </span>
-
-        <span class="frase"
-              style="--sx:50vw;--sy:8vh;--ex:300px;--ey:360px;--delay:1.4s;--rot:0deg">
-            un detalle para ti
-        </span>
-
-        <span class="frase"
-              style="--sx:8vw;--sy:85vh;--ex:220px;--ey:405px;--delay:1.55s;--rot:-6deg">
-            siempre
-        </span>
-
-        <span class="frase"
-              style="--sx:92vw;--sy:25vh;--ex:380px;--ey:405px;--delay:1.7s;--rot:7deg">
-            especial
-        </span>
-
-        <span class="frase"
-              style="--sx:50vw;--sy:92vh;--ex:300px;--ey:450px;--delay:1.85s;--rot:0deg">
-            hecho con cariño
-        </span>
-
-        <span class="frase"
-              style="--sx:35vw;--sy:50vh;--ex:260px;--ey:250px;--delay:2s;--rot:-3deg">
-            gracias por existir
-        </span>
-
-        <span class="frase"
-              style="--sx:65vw;--sy:55vh;--ex:340px;--ey:250px;--delay:2.15s;--rot:3deg">
-            para alguien especial
-        </span>
-
-        <span class="frase"
-              style="--sx:45vw;--sy:30vh;--ex:300px;--ey:300px;--delay:2.3s;--rot:0deg">
-            💙
-        </span>
-
-    </div>
-
-
-    <div class="mensaje-final">
-        Y este pequeño detalle siempre tendrá una historia detrás. 💙
     </div>
 
 </section>
 
 
 <!-- =====================================================
-     MUSICA
-====================================================== -->
+     MÚSICA
+===================================================== -->
 
-<audio id="musica" src="cancion.mp3" preload="auto" loop></audio>
+<audio
+    id="music"
+    src="cancion.mp3"
+    preload="auto"
+    loop>
+</audio>
 
-<button class="musica" id="botonMusica">
+<button
+    class="music-button"
+    id="musicButton">
     ♫
 </button>
 
@@ -1075,108 +1267,182 @@ Con mucho cariño,
 <script>
 
 /* =========================================================
-   VARIABLES
+   CAMBIO DE ESCENAS
 ========================================================= */
 
-const inicio = document.getElementById("inicio");
-const carga = document.getElementById("carga");
-const ramo = document.getElementById("ramo");
-const carta = document.getElementById("carta");
-const final = document.getElementById("final");
+const intro =
+    document.getElementById("intro");
 
-const logo = document.getElementById("logo");
-const musica = document.getElementById("musica");
-const botonMusica = document.getElementById("botonMusica");
+const loading =
+    document.getElementById("loading");
 
-const porcentaje = document.getElementById("porcentaje");
+const gift =
+    document.getElementById("gift");
 
-let intervaloCarga;
+const letter =
+    document.getElementById("letter");
 
+const heart =
+    document.getElementById("heart");
 
-/* =========================================================
-   CAMBIO DE ESCENA
-========================================================= */
+function showScene(scene){
 
-function cambiarEscena(escena){
+    document
+        .querySelectorAll(".scene")
+        .forEach(item => {
+            item.classList.remove("active");
+        });
 
-    document.querySelectorAll(".scene").forEach(elemento=>{
-        elemento.classList.remove("active");
-    });
-
-    escena.classList.add("active");
+    scene.classList.add("active");
 }
 
 
 /* =========================================================
-   AL PRESIONAR EL LOGO
+   MÚSICA
 ========================================================= */
 
-logo.addEventListener("click", iniciarHistoria);
+const music =
+    document.getElementById("music");
 
-logo.addEventListener("touchend",function(e){
-    e.preventDefault();
-    iniciarHistoria();
-});
-
-
-let historiaIniciada=false;
-
-function iniciarHistoria(){
-
-    if(historiaIniciada) return;
-
-    historiaIniciada=true;
-
-    /* La música comienza únicamente después
-       de la interacción del usuario */
-
-    musica.volume=.75;
-
-    musica.play().then(()=>{
-        botonMusica.classList.add("visible");
-    }).catch(()=>{
-        botonMusica.classList.add("visible");
-    });
-
-
-    cambiarEscena(carga);
-
-    iniciarCarga();
-}
+const musicButton =
+    document.getElementById("musicButton");
 
 
 /* =========================================================
-   BARRA 1% - 100%
+   LOGO → CARGA
 ========================================================= */
 
-function iniciarCarga(){
+document
+.getElementById("logo")
+.addEventListener("click", function(){
 
-    let numero=1;
+    /*
+        La música comienza solamente después
+        de la interacción del usuario.
+    */
 
-    porcentaje.textContent="1%";
+    music.volume = 0.78;
 
-    intervaloCarga=setInterval(()=>{
+    music.play().catch(() => {});
 
-        numero++;
+    musicButton.classList.add("visible");
 
-        if(numero>100){
-            numero=100;
-            clearInterval(intervaloCarga);
+    showScene(loading);
 
-            porcentaje.textContent="100%";
+    startLoading();
 
-            setTimeout(()=>{
+},{once:true});
 
-                cambiarEscena(ramo);
+
+/* =========================================================
+   CARGA 1% → 100%
+
+   IMPORTANTE:
+
+   El porcentaje, la barra Y el carro utilizan
+   EXACTAMENTE la misma variable "progress".
+
+   Así el carro jamás llegará antes o después
+   que el 100%.
+========================================================= */
+
+function startLoading(){
+
+    const progressBar =
+        document.getElementById("progressBar");
+
+    const loadingCar =
+        document.getElementById("loadingCar");
+
+    const percent =
+        document.getElementById("percent");
+
+    const duration = 5000;
+
+    const start = performance.now();
+
+    function animate(currentTime){
+
+        const elapsed =
+            currentTime - start;
+
+        let progress =
+            elapsed / duration;
+
+        progress =
+            Math.max(
+                0,
+                Math.min(1,progress)
+            );
+
+        /*
+            Este mismo valor controla
+            absolutamente todo.
+        */
+
+        const percentage =
+            Math.floor(progress * 100);
+
+        /*
+            Barra
+        */
+
+        progressBar.style.width =
+            percentage + "%";
+
+
+        /*
+            Número
+        */
+
+        percent.textContent =
+            Math.max(1,percentage) + "%";
+
+
+        /*
+            CARRO
+
+            0% = extremo izquierdo
+            100% = extremo derecho
+
+            El centro del carro coincide con
+            el progreso de la barra.
+        */
+
+        loadingCar.style.left =
+            (progress * 100) + "%";
+
+
+        /*
+            Cuando llega exactamente al 100%
+        */
+
+        if(progress < 1){
+
+            requestAnimationFrame(animate);
+
+        }else{
+
+            progressBar.style.width = "100%";
+
+            loadingCar.style.left = "100%";
+
+            percent.textContent = "100%";
+
+            /*
+                El carro queda unos instantes
+                exactamente en el 100%.
+            */
+
+            setTimeout(function(){
+
+                showScene(gift);
 
             },700);
-
-            return;
         }
+    }
 
-        porcentaje.textContent=numero+"%";
-
-    },50);
+    requestAnimationFrame(animate);
 }
 
 
@@ -1184,41 +1450,47 @@ function iniciarCarga(){
    ABRIR CARTA
 ========================================================= */
 
-document.getElementById("abrirCarta").addEventListener("click",()=>{
+document
+.getElementById("openLetter")
+.addEventListener("click",function(){
 
-    cambiarEscena(carta);
-
-});
-
-
-/* =========================================================
-   CERRAR CARTA
-========================================================= */
-
-document.getElementById("cerrarCarta").addEventListener("click",()=>{
-
-    cambiarEscena(final);
+    showScene(letter);
 
 });
 
 
 /* =========================================================
-   CONTROL DE MUSICA
+   CERRAR CARTA → CORAZÓN
 ========================================================= */
 
-botonMusica.addEventListener("click",()=>{
+document
+.getElementById("closeLetter")
+.addEventListener("click",function(){
 
-    if(musica.paused){
+    showScene(heart);
 
-        musica.play();
+    createHeart();
 
-        botonMusica.textContent="♫";
+});
+
+
+/* =========================================================
+   BOTÓN DE MÚSICA
+========================================================= */
+
+musicButton.addEventListener("click",function(){
+
+    if(music.paused){
+
+        music.play().catch(() => {});
+
+        musicButton.textContent = "♫";
 
     }else{
 
-        musica.pause();
+        music.pause();
 
-        botonMusica.textContent="Ⅱ";
+        musicButton.textContent = "Ⅱ";
 
     }
 
@@ -1226,33 +1498,341 @@ botonMusica.addEventListener("click",()=>{
 
 
 /* =========================================================
-   PERMITIR QUE EL CORAZÓN SEA VISIBLE
+   CORAZÓN FORMADO POR FRASES
 ========================================================= */
 
-document.querySelectorAll(".frase").forEach(frase=>{
+const canvas =
+    document.getElementById("heartCanvas");
 
-    frase.addEventListener("animationend",()=>{
+const ctx =
+    canvas.getContext("2d");
 
-        frase.style.opacity="1";
+let W;
+let H;
+let DPR;
 
-    });
+let heartParticles = [];
 
-});
+let animationFrame;
 
 
-/* =========================================================
-   EVITAR SCROLL ACCIDENTAL
-========================================================= */
+function resizeCanvas(){
 
-document.addEventListener("touchmove",function(e){
+    DPR =
+        Math.min(
+            window.devicePixelRatio || 1,
+            2
+        );
 
-    if(
-        !e.target.closest(".carta")
-    ){
-        e.preventDefault();
+    W = window.innerWidth;
+    H = window.innerHeight;
+
+    canvas.width =
+        W * DPR;
+
+    canvas.height =
+        H * DPR;
+
+    canvas.style.width =
+        W + "px";
+
+    canvas.style.height =
+        H + "px";
+
+    ctx.setTransform(
+        DPR,
+        0,
+        0,
+        DPR,
+        0,
+        0
+    );
+}
+
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+resizeCanvas();
+
+
+const phrases = [
+
+    "para ti",
+    "eres especial",
+    "gracias",
+    "sonríe",
+    "30 de septiembre",
+    "con cariño",
+    "un detalle",
+    "siempre",
+    "feliz",
+    "💙",
+    "especial",
+    "bonito",
+    "gracias por existir",
+    "para alguien especial",
+    "hecho con cariño",
+    "un pequeño detalle",
+    "que sonrías",
+    "para ti 💙",
+    "con mucho cariño",
+    "te quiero",
+    "un recuerdo",
+    "para alguien especial",
+    "felicidad",
+    "sonríe siempre"
+];
+
+
+function heartPosition(t,scale){
+
+    const x =
+        16 * Math.pow(Math.sin(t),3);
+
+    const y =
+        -(
+            13 * Math.cos(t)
+            -5 * Math.cos(2*t)
+            -2 * Math.cos(3*t)
+            -Math.cos(4*t)
+        );
+
+    return {
+
+        x:
+            W/2 + x*scale,
+
+        y:
+            H/2 + y*scale
+    };
+}
+
+
+function createHeart(){
+
+    cancelAnimationFrame(
+        animationFrame
+    );
+
+    resizeCanvas();
+
+    heartParticles = [];
+
+    const scale =
+        Math.min(W,H) * .018;
+
+    const amount =
+        Math.min(
+            500,
+            Math.max(
+                300,
+                Math.floor(
+                    W*H/2700
+                )
+            )
+        );
+
+
+    for(let i=0;i<amount;i++){
+
+        const t =
+            (i/amount) *
+            Math.PI * 2;
+
+
+        let target;
+
+
+        if(i < amount*.55){
+
+            target =
+                heartPosition(
+                    t,
+                    scale
+                );
+
+        }else{
+
+            const innerScale =
+                scale *
+                (.20 + Math.random()*.72);
+
+            target =
+                heartPosition(
+                    t,
+                    innerScale
+                );
+        }
+
+
+        heartParticles.push({
+
+            startX:
+                Math.random()*W,
+
+            startY:
+                Math.random()*H,
+
+            targetX:
+                target.x +
+                (Math.random()-.5)*8,
+
+            targetY:
+                target.y +
+                (Math.random()-.5)*8,
+
+            text:
+                phrases[
+                    i %
+                    phrases.length
+                ],
+
+            size:
+                9 +
+                Math.random()*6,
+
+            delay:
+                Math.random()*1600
+
+        });
     }
 
-},{passive:false});
+
+    const beginning =
+        performance.now();
+
+
+    function draw(now){
+
+        const elapsed =
+            now - beginning;
+
+
+        ctx.clearRect(
+            0,
+            0,
+            W,
+            H
+        );
+
+
+        ctx.fillStyle =
+            "#01040a";
+
+        ctx.fillRect(
+            0,
+            0,
+            W,
+            H
+        );
+
+
+        heartParticles.forEach(
+            particle => {
+
+                const raw =
+                    (
+                        elapsed -
+                        particle.delay
+                    ) / 1700;
+
+
+                const progress =
+                    Math.max(
+                        0,
+                        Math.min(
+                            1,
+                            raw
+                        )
+                    );
+
+
+                const ease =
+                    1 -
+                    Math.pow(
+                        1-progress,
+                        3
+                    );
+
+
+                const x =
+                    particle.startX +
+                    (
+                        particle.targetX -
+                        particle.startX
+                    ) * ease;
+
+
+                const y =
+                    particle.startY +
+                    (
+                        particle.targetY -
+                        particle.startY
+                    ) * ease;
+
+
+                ctx.globalAlpha =
+                    .05 +
+                    .95 * ease;
+
+
+                ctx.font =
+                    `600 ${particle.size}px Georgia`;
+
+
+                ctx.textAlign =
+                    "center";
+
+
+                ctx.textBaseline =
+                    "middle";
+
+
+                ctx.fillStyle =
+                    progress > .7
+                    ? "#73d5ff"
+                    : "#e5f9ff";
+
+
+                ctx.shadowBlur =
+                    progress > .7
+                    ? 10
+                    : 3;
+
+
+                ctx.shadowColor =
+                    "#42bfff";
+
+
+                ctx.fillText(
+                    particle.text,
+                    x,
+                    y
+                );
+
+            }
+        );
+
+
+        ctx.globalAlpha = 1;
+        ctx.shadowBlur = 0;
+
+
+        if(elapsed < 5200){
+
+            animationFrame =
+                requestAnimationFrame(draw);
+
+        }
+
+    }
+
+
+    requestAnimationFrame(draw);
+}
 
 </script>
 
