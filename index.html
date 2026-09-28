@@ -1416,10 +1416,10 @@ body{
 .speed-title{margin-bottom:18px;font:900 clamp(16px,4vw,24px) Arial Black,Arial,sans-serif;letter-spacing:.16em;color:#eafaff;text-shadow:0 0 8px #21bfff,0 0 22px rgba(33,191,255,.55)}
 .speedometer{position:relative;width:min(76vw,360px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(5,25,38,.94) 0 48%,rgba(3,12,20,.9) 49% 72%,rgba(0,0,0,.7) 73%);border:2px solid rgba(110,220,255,.55);box-shadow:0 0 15px rgba(40,190,255,.55),0 0 55px rgba(20,150,220,.25),inset 0 0 35px rgba(0,0,0,.85)}
 .speedometer:before{content:"";position:absolute;inset:8%;border-radius:50%;border:1px solid rgba(130,225,255,.18)}
-.speed-ring{position:absolute;inset:17%;border-radius:50%;border:4px solid rgba(75,205,255,.18);border-top-color:#4fd4ff;border-right-color:#1fa9e7;transform:rotate(-35deg);box-shadow:0 0 12px rgba(50,200,255,.45)}
+.speed-ring{position:absolute;left:8%;right:8%;top:8%;height:84%;border-radius:50% 50% 0 0;border:4px solid rgba(75,205,255,.18);border-bottom:none;border-top-color:#4fd4ff;box-shadow:0 0 12px rgba(50,200,255,.45)}
 .tick{position:absolute;color:#aeeaff;font:bold clamp(12px,3vw,17px) Arial,sans-serif;text-shadow:0 0 8px rgba(60,205,255,.8)}
-.t0{left:13%;bottom:23%}.t20{left:17%;top:34%}.t40{left:34%;top:14%}.t60{right:34%;top:14%}.t80{right:17%;top:34%}.t100{right:9%;bottom:23%}
-.speed-needle{position:absolute;left:50%;top:50%;width:40%;height:5px;transform-origin:0 50%;transform:rotate(-135deg);transition:transform .08s linear;z-index:5}
+.t0{left:8%;bottom:18%}.t20{left:15%;top:40%}.t40{left:30%;top:15%}.t60{right:30%;top:15%}.t80{right:15%;top:40%}.t100{right:8%;bottom:18%}
+.speed-needle{position:absolute;left:50%;top:50%;width:40%;height:5px;transform-origin:0 50%;transform:rotate(-90deg);transition:transform .08s linear;z-index:5}
 .speed-needle span{position:absolute;right:0;top:50%;width:100%;height:4px;transform:translateY(-50%);border-radius:10px;background:linear-gradient(90deg,#a8eeff,#22bfff);box-shadow:0 0 8px #21bfff,0 0 18px rgba(33,191,255,.7)}
 .speed-needle:after{content:"";position:absolute;left:-9px;top:50%;width:18px;height:18px;transform:translateY(-50%);border-radius:50%;background:#062237;border:2px solid #72ddff;box-shadow:0 0 12px #21bfff}
 .speed-center{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-42%);text-align:center}
@@ -1865,7 +1865,7 @@ function startLoading(){
         const speed = progress >= 1 ? 100 : Math.floor(eased*100);
 
         number.textContent = speed;
-        needle.style.transform = `rotate(${-135+(speed/100)*270}deg)`;
+        needle.style.transform = `rotate(${-90+(speed/100)*180}deg)`;
 
         if(progress < 1){
             requestAnimationFrame(animate);
