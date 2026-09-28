@@ -1408,6 +1408,7 @@ body{
     }
 }
 
+\n/* =========================================================\n   VELOCÍMETRO 0–100 KM/H Y ARRANQUE DEL TUCSON\n========================================================= */\n.speedometer-container{position:relative;z-index:30;width:min(92vw,520px);display:flex;flex-direction:column;align-items:center;text-align:center}\n.speed-title{margin-bottom:18px;font:900 clamp(16px,4vw,24px) Arial Black,Arial,sans-serif;letter-spacing:.16em;color:#eafaff;text-shadow:0 0 8px #21bfff,0 0 22px rgba(33,191,255,.55)}\n.speedometer{position:relative;width:min(76vw,360px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(5,25,38,.94) 0 48%,rgba(3,12,20,.9) 49% 72%,rgba(0,0,0,.7) 73%);border:2px solid rgba(110,220,255,.55);box-shadow:0 0 15px rgba(40,190,255,.55),0 0 55px rgba(20,150,220,.25),inset 0 0 35px rgba(0,0,0,.85)}\n.speedometer:before{content:"";position:absolute;inset:8%;border-radius:50%;border:1px solid rgba(130,225,255,.18)}\n.speed-ring{position:absolute;inset:17%;border-radius:50%;border:4px solid rgba(75,205,255,.18);border-top-color:#4fd4ff;border-right-color:#1fa9e7;transform:rotate(-35deg);box-shadow:0 0 12px rgba(50,200,255,.45)}\n.tick{position:absolute;color:#aeeaff;font:bold clamp(12px,3vw,17px) Arial,sans-serif;text-shadow:0 0 8px rgba(60,205,255,.8)}\n.t0{left:13%;bottom:23%}.t20{left:17%;top:34%}.t40{left:34%;top:14%}.t60{right:34%;top:14%}.t80{right:17%;top:34%}.t100{right:9%;bottom:23%}\n.speed-needle{position:absolute;left:50%;top:50%;width:40%;height:5px;transform-origin:0 50%;transform:rotate(-135deg);transition:transform .08s linear;z-index:5}\n.speed-needle span{position:absolute;right:0;top:50%;width:100%;height:4px;transform:translateY(-50%);border-radius:10px;background:linear-gradient(90deg,#a8eeff,#22bfff);box-shadow:0 0 8px #21bfff,0 0 18px rgba(33,191,255,.7)}\n.speed-needle:after{content:"";position:absolute;left:-9px;top:50%;width:18px;height:18px;transform:translateY(-50%);border-radius:50%;background:#062237;border:2px solid #72ddff;box-shadow:0 0 12px #21bfff}\n.speed-center{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-42%);text-align:center}\n.speed-number{font:900 clamp(48px,13vw,78px) Arial Black,Arial,sans-serif;line-height:.9;color:#eaffff;text-shadow:0 0 5px #fff,0 0 14px #28c6ff,0 0 30px rgba(20,165,230,.8)}\n.speed-unit{margin-top:10px;font:13px Arial,sans-serif;letter-spacing:.28em;color:#8cdbf7}\n.speed-ready{margin-top:20px;min-height:20px;font:13px Arial,sans-serif;letter-spacing:.22em;color:#70dfff;opacity:0;transition:opacity .5s;text-shadow:0 0 10px rgba(40,200,255,.8)}\n.speed-ready.visible{opacity:1}\n.start-engine{margin-top:15px;padding:14px 38px;border-radius:50px;border:1px solid rgba(150,230,255,.9);background:rgba(2,25,42,.92);color:white;font:15px Arial Black,Arial,sans-serif;letter-spacing:.16em;cursor:pointer;opacity:0;transform:translateY(12px) scale(.92);pointer-events:none;transition:opacity .45s,transform .45s,box-shadow .3s;box-shadow:0 0 14px rgba(40,195,255,.5),0 0 35px rgba(40,195,255,.18)}\n.start-engine.ready{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;animation:enginePulse 1.4s ease-in-out infinite}\n@keyframes enginePulse{50%{box-shadow:0 0 22px rgba(40,205,255,.85),0 0 50px rgba(40,195,255,.35)}}\n.loading-drive-car{position:absolute;z-index:35;left:-30%;bottom:13%;width:min(42vw,260px);height:auto;opacity:0;pointer-events:none;filter:drop-shadow(0 10px 8px rgba(0,0,0,.8)) drop-shadow(0 0 14px rgba(60,200,255,.5))}\n.loading-drive-car.drive{animation:tucsonDrive 1.8s cubic-bezier(.15,.72,.18,1) forwards}\n@keyframes tucsonDrive{0%{left:-30%;opacity:0;transform:scale(.88)}8%{opacity:1}48%{transform:scale(1.02) translateY(-3px)}100%{left:110%;opacity:1;transform:scale(1.08)}}\n.global-tucson-bg img{animation:tucsonSlowZoom 18s ease-in-out infinite alternate;transform-origin:center center}\n@keyframes tucsonSlowZoom{0%{transform:scale(1.035)}100%{transform:scale(1.10)}}\n#heart{background:transparent !important}\n@media(max-width:600px){.speedometer{width:min(82vw,330px)}.loading-drive-car{width:58vw;bottom:15%}}\n
 </style>
 </head>
 
@@ -1462,35 +1463,31 @@ body{
 
     <div class="loading-overlay"></div>
 
-    <div class="loading-container">
+    <img src="tucson.png" class="loading-drive-car" id="loadingDriveCar" alt="Hyundai Tucson">
 
-        <div class="loading-title">
-            Preparando una sorpresa para ti...
-        </div>
+        <div class="speedometer-container">
+            <div class="speed-title">PREPARANDO EL MOTOR</div>
 
-        <div class="progress-track">
+            <div class="speedometer">
+                <div class="speed-ring"></div>
+                <span class="tick t0">0</span>
+                <span class="tick t20">20</span>
+                <span class="tick t40">40</span>
+                <span class="tick t60">60</span>
+                <span class="tick t80">80</span>
+                <span class="tick t100">100</span>
 
-            <div
-                class="progress-bar"
-                id="progressBar">
+                <div class="speed-needle" id="speedNeedle"><span></span></div>
+
+                <div class="speed-center">
+                    <div class="speed-number" id="speedNumber">0</div>
+                    <div class="speed-unit">KM/H</div>
+                </div>
             </div>
 
-            <img
-                src="hotwheels.png"
-                class="loading-car"
-                id="loadingCar"
-                alt="Hot Wheels"
-            >
-
+            <div class="speed-ready" id="speedReady">MOTOR LISTO</div>
+            <button class="start-engine" id="startEngine" disabled>ARRANCAR</button>
         </div>
-
-        <div
-            class="percent"
-            id="percent">
-            1%
-        </div>
-
-    </div>
 
 </section>
 
@@ -1820,118 +1817,7 @@ document
    CARGA 1 → 100
 ========================================================= */
 
-function startLoading(){
-
-    const bar =
-        document.getElementById(
-            "progressBar"
-        );
-
-    const car =
-        document.getElementById(
-            "loadingCar"
-        );
-
-    const percent =
-        document.getElementById(
-            "percent"
-        );
-
-
-    const duration =
-        5000;
-
-    const start =
-        performance.now();
-
-
-    function animate(now){
-
-        const elapsed =
-            now - start;
-
-
-        let progress =
-            elapsed / duration;
-
-
-        progress =
-            Math.max(
-                0,
-                Math.min(
-                    1,
-                    progress
-                )
-            );
-
-
-        const percentage =
-            Math.floor(
-                progress * 100
-            );
-
-
-        /*
-            EL MISMO PROGRESO
-            CONTROLA TODO.
-        */
-
-        bar.style.width =
-            percentage + "%";
-
-
-        percent.textContent =
-            Math.max(
-                1,
-                percentage
-            ) + "%";
-
-
-        car.style.left =
-            progress * 100 + "%";
-
-
-        if(progress < 1){
-
-            requestAnimationFrame(
-                animate
-            );
-
-        }else{
-
-            bar.style.width =
-                "100%";
-
-            car.style.left =
-                "100%";
-
-            percent.textContent =
-                "100%";
-
-
-            setTimeout(
-                function(){
-
-                    showScene(
-                        love
-                    );
-
-                    createNeonMessage();
-
-                },
-                800
-            );
-        }
-    }
-
-
-    requestAnimationFrame(
-        animate
-    );
-}
-
-
-/* =========================================================
+function startLoading(){\n\n    const number = document.getElementById("speedNumber");\n    const needle = document.getElementById("speedNeedle");\n    const ready = document.getElementById("speedReady");\n    const button = document.getElementById("startEngine");\n    const car = document.getElementById("loadingDriveCar");\n\n    const duration = 5200;\n    const start = performance.now();\n\n    function animate(now){\n        const progress = Math.min(1,(now-start)/duration);\n        const eased = 1-Math.pow(1-progress,2.2);\n        const speed = progress >= 1 ? 100 : Math.floor(eased*100);\n\n        number.textContent = speed;\n        needle.style.transform = `rotate(${-135+(speed/100)*270}deg)`;\n\n        if(progress < 1){\n            requestAnimationFrame(animate);\n        }else{\n            ready.classList.add("visible");\n            button.disabled = false;\n            button.classList.add("ready");\n        }\n    }\n\n    button.onclick = function(){\n        if(button.disabled) return;\n\n        button.disabled = true;\n        button.classList.remove("ready");\n        ready.textContent = "¡ARRANCANDO!";\n        ready.classList.add("visible");\n\n        car.classList.remove("drive");\n        void car.offsetWidth;\n        car.classList.add("drive");\n\n        setTimeout(function(){\n            showScene(love);\n            createNeonMessage();\n            car.classList.remove("drive");\n        },1850);\n    };\n\n    requestAnimationFrame(animate);\n}\n\n\n/* =========================================================
    TE QUIERO MUCHO
    LETRA POR LETRA
 ========================================================= */
@@ -2308,11 +2194,11 @@ function createFinalHeart(){
 
             targetX:
                 targetX +
-                (Math.random()-.5)*7,
+                (Math.random()-.5)*9,
 
             targetY:
                 targetY +
-                (Math.random()-.5)*7,
+                (Math.random()-.5)*9,
 
             /*
                 ÚNICAMENTE:
