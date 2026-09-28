@@ -2,14 +2,18 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>Para ti 💙</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -30,6 +34,7 @@ body{
     color:white;
 }
 
+
 /* =========================================================
    ESCENAS
 ========================================================= */
@@ -37,6 +42,7 @@ body{
 .scene{
     position:fixed;
     inset:0;
+
     width:100%;
     height:100dvh;
 
@@ -49,6 +55,8 @@ body{
     transition:
         opacity .8s ease,
         visibility .8s ease;
+
+    z-index:10;
 }
 
 .scene.active{
@@ -59,12 +67,94 @@ body{
 
 
 /* =========================================================
-   CORAZONES AZULES FLOTANTES
-   PERMANECEN DURANTE TODA LA EXPERIENCIA
+   TUCSON — FONDO PERMANENTE
+========================================================= */
+
+.global-tucson-bg{
+    position:fixed;
+    inset:0;
+
+    z-index:0;
+
+    width:100%;
+    height:100dvh;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    background:#020812;
+}
+
+.global-tucson-bg img{
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    object-position:center center;
+
+    opacity:.32;
+
+    filter:
+        brightness(.48)
+        contrast(1.12)
+        saturate(.82);
+
+    transform:scale(1.035);
+
+    transform-origin:center center;
+
+    animation:
+        tucsonSlowZoom
+        18s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+@keyframes tucsonSlowZoom{
+
+    0%{
+        transform:scale(1.035);
+    }
+
+    100%{
+        transform:scale(1.10);
+    }
+}
+
+.global-tucson-overlay{
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,5,12,.34) 0%,
+            rgba(0,12,22,.22) 45%,
+            rgba(0,3,9,.62) 100%
+        ),
+        radial-gradient(
+            circle at center,
+            transparent 15%,
+            rgba(0,0,0,.32) 100%
+        );
+}
+
+
+/* =========================================================
+   CORAZONES FLOTANTES
 ========================================================= */
 
 .floating-hearts{
     position:fixed;
+
     inset:0;
 
     z-index:450;
@@ -90,7 +180,9 @@ body{
         0 0 18px rgba(60,200,255,.45);
 
     animation:
-        heartFloat linear infinite;
+        heartFloat
+        linear
+        infinite;
 }
 
 @keyframes heartFloat{
@@ -144,25 +236,16 @@ body{
 
 #intro{
     display:flex;
+
     align-items:center;
     justify-content:center;
 
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(24,110,165,.28),
-            transparent 40%
-        ),
-        linear-gradient(
-            180deg,
-            #010207,
-            #03101c,
-            #010207
-        );
+    background:transparent !important;
 }
 
 .speed-lines{
     position:absolute;
+
     inset:-60%;
 
     background:
@@ -175,7 +258,10 @@ body{
         );
 
     animation:
-        speedMove 5s linear infinite;
+        speedMove
+        5s
+        linear
+        infinite;
 }
 
 @keyframes speedMove{
@@ -199,12 +285,22 @@ body{
     cursor:pointer;
 
     filter:
-        drop-shadow(0 0 10px rgba(255,70,30,.55))
-        drop-shadow(0 0 28px rgba(255,190,0,.25));
+        drop-shadow(
+            0 0 10px rgba(255,70,30,.55)
+        )
+        drop-shadow(
+            0 0 28px rgba(255,190,0,.25)
+        );
 
     animation:
-        logoIn 1.4s cubic-bezier(.15,.85,.2,1),
-        logoFloat 3s 1.4s ease-in-out infinite;
+        logoIn
+        1.4s
+        cubic-bezier(.15,.85,.2,1),
+        logoFloat
+        3s
+        1.4s
+        ease-in-out
+        infinite;
 }
 
 @keyframes logoIn{
@@ -247,149 +343,502 @@ body{
 
 
 /* =========================================================
-   ESCENA 2 — CARGA
+   ESCENA 2 — VELOCÍMETRO
 ========================================================= */
 
 #loading{
     display:flex;
+
     align-items:center;
     justify-content:center;
 
-    background:#020812;
-}
-
-.tucson-background{
-    position:absolute;
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    opacity:.34;
-
-    filter:
-        brightness(.42)
-        contrast(1.15)
-        saturate(.7)
-        blur(1px);
-
-    transform:scale(1.06);
+    background:transparent !important;
 }
 
 .loading-overlay{
     position:absolute;
+
     inset:0;
 
     background:
         radial-gradient(
             circle at center,
-            transparent 5%,
-            rgba(0,0,0,.30) 50%,
-            rgba(0,0,0,.78) 100%
+            transparent 8%,
+            rgba(0,0,0,.22) 52%,
+            rgba(0,0,0,.62) 100%
         );
 }
 
-.loading-container{
+
+/* =========================================================
+   CONTENEDOR VELOCÍMETRO
+========================================================= */
+
+.speedometer-container{
+
     position:relative;
 
-    z-index:10;
+    z-index:30;
 
-    width:min(88vw,700px);
+    width:min(92vw,520px);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
 
     text-align:center;
 }
 
-.loading-title{
-    margin-bottom:65px;
+.speed-title{
 
-    font-size:
-        clamp(18px,5vw,30px);
+    margin-bottom:15px;
+
+    font:
+        900
+        clamp(16px,4vw,24px)
+        Arial Black,
+        Arial,
+        sans-serif;
+
+    letter-spacing:.16em;
 
     color:#eafaff;
 
     text-shadow:
-        0 0 15px rgba(80,200,255,.7);
+        0 0 8px #21bfff,
+        0 0 22px rgba(33,191,255,.55);
 }
 
-.progress-track{
+
+/* =========================================================
+   VELOCÍMETRO — SEMICÍRCULO 180°
+========================================================= */
+
+.speedometer{
+
     position:relative;
 
-    width:100%;
-    height:12px;
+    width:min(82vw,430px);
 
-    border-radius:30px;
+    height:min(43vw,215px);
+
+    overflow:visible;
 
     background:
-        rgba(255,255,255,.08);
-
-    border:
-        1px solid rgba(120,215,255,.35);
-
-    box-shadow:
-        inset 0 0 10px rgba(0,0,0,.7),
-        0 0 18px rgba(40,170,230,.18);
+        radial-gradient(
+            ellipse at center bottom,
+            rgba(5,25,38,.95),
+            rgba(3,12,20,.85) 65%,
+            transparent 66%
+        );
 }
 
-.progress-bar{
+
+/* =========================================================
+   ARCO
+========================================================= */
+
+.speed-ring{
+
     position:absolute;
 
-    left:0;
+    left:5%;
+    right:5%;
+
     top:0;
 
-    width:0%;
-    height:100%;
+    height:200%;
 
-    border-radius:30px;
+    border-radius:50%;
+
+    border:4px solid rgba(75,205,255,.25);
+
+    border-bottom-color:transparent;
+
+    border-left-color:#4fd4ff;
+
+    border-right-color:#4fd4ff;
+
+    border-top-color:#4fd4ff;
+
+    clip-path:inset(0 0 50% 0);
+
+    box-shadow:
+        0 0 12px rgba(50,200,255,.45),
+        0 0 25px rgba(50,200,255,.15);
+}
+
+
+/* =========================================================
+   NÚMEROS
+========================================================= */
+
+.tick{
+
+    position:absolute;
+
+    z-index:10;
+
+    color:#aeeaff;
+
+    font:
+        bold
+        clamp(12px,3vw,18px)
+        Arial,
+        sans-serif;
+
+    text-shadow:
+        0 0 8px rgba(60,205,255,.8);
+
+    transform:
+        translate(-50%,-50%);
+}
+
+.t0{
+    left:5%;
+    top:92%;
+}
+
+.t20{
+    left:14%;
+    top:54%;
+}
+
+.t40{
+    left:31%;
+    top:20%;
+}
+
+.t60{
+    right:31%;
+    top:20%;
+}
+
+.t80{
+    right:14%;
+    top:54%;
+}
+
+.t100{
+    right:5%;
+    top:92%;
+}
+
+
+/* =========================================================
+   AGUJA
+========================================================= */
+
+.speed-needle{
+
+    position:absolute;
+
+    z-index:20;
+
+    left:50%;
+
+    top:92%;
+
+    width:43%;
+
+    height:5px;
+
+    transform-origin:0 50%;
+
+    transform:rotate(90deg);
+
+    transition:
+        transform .08s linear;
+}
+
+.speed-needle span{
+
+    position:absolute;
+
+    right:0;
+
+    top:50%;
+
+    width:100%;
+
+    height:4px;
+
+    transform:
+        translateY(-50%);
+
+    border-radius:10px;
 
     background:
         linear-gradient(
             90deg,
-            #075996,
-            #25a9ed,
-            #a0eaff
+            #a8eeff,
+            #22bfff
         );
 
     box-shadow:
-        0 0 10px rgba(80,200,255,.9),
-        0 0 25px rgba(80,200,255,.35);
+        0 0 8px #21bfff,
+        0 0 18px rgba(33,191,255,.7);
 }
 
-.loading-car{
+.speed-needle:after{
+
+    content:"";
+
     position:absolute;
 
-    z-index:5;
+    left:-10px;
 
-    left:0%;
     top:50%;
 
-    width:95px;
-    height:auto;
+    width:20px;
+
+    height:20px;
+
+    transform:
+        translateY(-50%);
+
+    border-radius:50%;
+
+    background:#062237;
+
+    border:
+        2px solid #72ddff;
+
+    box-shadow:
+        0 0 12px #21bfff;
+}
+
+
+/* =========================================================
+   CENTRO
+========================================================= */
+
+.speed-center{
+
+    position:absolute;
+
+    z-index:25;
+
+    left:50%;
+
+    top:72%;
 
     transform:
         translate(-50%,-50%);
 
+    text-align:center;
+}
+
+.speed-number{
+
+    font:
+        900
+        clamp(45px,12vw,72px)
+        Arial Black,
+        Arial,
+        sans-serif;
+
+    line-height:.9;
+
+    color:#eaffff;
+
+    text-shadow:
+        0 0 5px #fff,
+        0 0 14px #28c6ff,
+        0 0 30px rgba(20,165,230,.8);
+}
+
+.speed-unit{
+
+    margin-top:8px;
+
+    font:
+        13px Arial,sans-serif;
+
+    letter-spacing:.28em;
+
+    color:#8cdbf7;
+}
+
+
+/* =========================================================
+   MOTOR LISTO
+========================================================= */
+
+.speed-ready{
+
+    margin-top:12px;
+
+    min-height:20px;
+
+    font:
+        13px Arial,sans-serif;
+
+    letter-spacing:.22em;
+
+    color:#70dfff;
+
+    opacity:0;
+
+    transition:
+        opacity .5s;
+
+    text-shadow:
+        0 0 10px rgba(40,200,255,.8);
+}
+
+.speed-ready.visible{
+    opacity:1;
+}
+
+
+/* =========================================================
+   BOTÓN ARRANCAR
+========================================================= */
+
+.start-engine{
+
+    margin-top:10px;
+
+    padding:14px 38px;
+
+    border-radius:50px;
+
+    border:
+        1px solid rgba(150,230,255,.9);
+
+    background:
+        rgba(2,25,42,.92);
+
+    color:white;
+
+    font:
+        15px Arial Black,
+        Arial,
+        sans-serif;
+
+    letter-spacing:.16em;
+
+    cursor:pointer;
+
+    opacity:0;
+
+    transform:
+        translateY(12px)
+        scale(.92);
+
+    pointer-events:none;
+
+    transition:
+        opacity .45s,
+        transform .45s,
+        box-shadow .3s;
+
+    box-shadow:
+        0 0 14px rgba(40,195,255,.5),
+        0 0 35px rgba(40,195,255,.18);
+}
+
+.start-engine.ready{
+
+    opacity:1;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    pointer-events:auto;
+
+    animation:
+        enginePulse
+        1.4s
+        ease-in-out
+        infinite;
+}
+
+@keyframes enginePulse{
+
+    50%{
+
+        box-shadow:
+            0 0 22px rgba(40,205,255,.85),
+            0 0 50px rgba(40,195,255,.35);
+    }
+}
+
+
+/* =========================================================
+   HOT WHEELS QUE ARRANCA
+========================================================= */
+
+.loading-drive-car{
+
+    position:absolute;
+
+    z-index:35;
+
+    left:-30%;
+
+    bottom:13%;
+
+    width:min(42vw,260px);
+
+    height:auto;
+
+    opacity:0;
+
     pointer-events:none;
 
     filter:
-        drop-shadow(0 5px 6px rgba(0,0,0,.7))
-        drop-shadow(0 0 8px rgba(80,190,255,.4));
+        drop-shadow(
+            0 10px 8px rgba(0,0,0,.8)
+        )
+        drop-shadow(
+            0 0 14px rgba(60,200,255,.5)
+        );
 }
 
-.percent{
-    margin-top:25px;
+.loading-drive-car.drive{
 
-    font-family:Arial,sans-serif;
+    animation:
+        tucsonDrive
+        1.8s
+        cubic-bezier(.15,.72,.18,1)
+        forwards;
+}
 
-    font-size:32px;
-    font-weight:bold;
+@keyframes tucsonDrive{
 
-    color:#bdeeff;
+    0%{
+        left:-30%;
 
-    text-shadow:
-        0 0 10px rgba(70,195,255,.8),
-        0 0 25px rgba(70,195,255,.3);
+        opacity:0;
+
+        transform:
+            scale(.88);
+    }
+
+    8%{
+        opacity:1;
+    }
+
+    48%{
+        transform:
+            scale(1.02)
+            translateY(-3px);
+    }
+
+    100%{
+
+        left:110%;
+
+        opacity:1;
+
+        transform:
+            scale(1.08);
+    }
 }
 
 
@@ -398,25 +847,18 @@ body{
 ========================================================= */
 
 #love{
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(15,105,160,.38),
-            transparent 40%
-        ),
-        linear-gradient(
-            180deg,
-            #020c16,
-            #031d2e,
-            #01060b
-        );
+    background:transparent !important;
 }
 
 .love-title{
+
     position:absolute;
 
     z-index:30;
@@ -427,8 +869,10 @@ body{
 
     text-align:center;
 
-    font-size:
-        clamp(25px,7vw,52px);
+    font:
+        clamp(25px,7vw,52px)
+        Georgia,
+        serif;
 
     color:#e9fbff;
 
@@ -441,10 +885,11 @@ body{
 
 
 /* =========================================================
-   LETRAS NEÓN
+   NEÓN
 ========================================================= */
 
 .neon-message{
+
     position:relative;
 
     z-index:20;
@@ -454,9 +899,10 @@ body{
     flex-direction:column;
 
     align-items:center;
+
     justify-content:center;
 
-    gap:2px;
+    gap:16px;
 
     width:100%;
 
@@ -464,16 +910,18 @@ body{
 }
 
 .neon-line{
+
     display:flex;
 
     justify-content:center;
 
-    gap:4px;
+    gap:8px;
 
     min-height:1em;
 }
 
 .neon-letter{
+
     display:inline-block;
 
     font-family:
@@ -502,7 +950,8 @@ body{
         0 0 60px rgba(0,155,255,.8);
 
     animation:
-        neonLetterIn .55s
+        neonLetterIn
+        .55s
         cubic-bezier(.15,.85,.25,1)
         forwards;
 
@@ -543,15 +992,17 @@ body{
 
 
 /* =========================================================
-   CARROS
+   HOT WHEELS
 ========================================================= */
 
 .hotwheel{
+
     position:absolute;
 
     z-index:15;
 
     width:105px;
+
     height:auto;
 
     opacity:0;
@@ -559,77 +1010,83 @@ body{
     pointer-events:none;
 
     filter:
-        drop-shadow(0 7px 7px rgba(0,0,0,.65))
-        drop-shadow(0 0 7px rgba(70,195,255,.25));
+        drop-shadow(
+            0 7px 7px rgba(0,0,0,.65)
+        )
+        drop-shadow(
+            0 0 7px rgba(70,195,255,.25)
+        );
 }
 
-
-/* 1 → izquierda / derecha */
-
 .car1{
+
     top:24%;
     left:-130px;
 
     animation:
-        carLeftRight 7s linear infinite;
+        carLeftRight
+        7s
+        linear
+        infinite;
 
     animation-delay:.2s;
 }
 
-    
-/* 3 → izquierda / derecha */
-
 .car3{
+
     top:45%;
     left:-130px;
 
     animation:
-        carLeftRight 8s linear infinite;
+        carLeftRight
+        8s
+        linear
+        infinite;
 
     animation-delay:2.5s;
 }
 
-
-/* 4 → derecha / izquierda */
-
 .car4{
+
     top:55%;
     right:-130px;
 
     animation:
-        carRightLeft 8.5s linear infinite;
+        carRightLeft
+        8.5s
+        linear
+        infinite;
 
     animation-delay:3.1s;
 }
 
-
-/* 5 → derecha / izquierda */
-
 .car5{
+
     top:66%;
     right:-130px;
 
     animation:
-        carRightLeft 9s linear infinite;
+        carRightLeft
+        9s
+        linear
+        infinite;
 
     animation-delay:1.8s;
 }
 
-
-/* 6 → derecha / izquierda */
-
 .car6{
+
     top:76%;
     right:-130px;
 
     animation:
-        carRightLeft 7.8s linear infinite;
+        carRightLeft
+        7.8s
+        linear
+        infinite;
 
     animation-delay:4s;
 }
-
-
-/* IZQUIERDA → DERECHA */
 
 @keyframes carLeftRight{
 
@@ -677,9 +1134,6 @@ body{
             rotate(2deg);
     }
 }
-
-
-/* DERECHA → IZQUIERDA */
 
 @keyframes carRightLeft{
 
@@ -734,6 +1188,7 @@ body{
 ========================================================= */
 
 .open-letter{
+
     position:absolute;
 
     z-index:50;
@@ -741,7 +1196,8 @@ body{
     left:50%;
     bottom:5vh;
 
-    transform:translateX(-50%);
+    transform:
+        translateX(-50%);
 
     padding:
         15px 32px;
@@ -757,6 +1213,7 @@ body{
     color:white;
 
     font-size:15px;
+
     font-weight:bold;
 
     letter-spacing:.13em;
@@ -766,7 +1223,10 @@ body{
         0 0 30px rgba(60,195,255,.18);
 
     animation:
-        buttonPulse 1.8s ease-in-out infinite;
+        buttonPulse
+        1.8s
+        ease-in-out
+        infinite;
 }
 
 @keyframes buttonPulse{
@@ -786,38 +1246,29 @@ body{
 
 
 /* =========================================================
-   ESCENA 4 — CARTA GLASSMORPHISM
+   ESCENA CARTA
 ========================================================= */
 
 #letter{
+
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 
     padding:18px;
 
     background:
-        radial-gradient(
-            circle at 50% 40%,
-            rgba(25,150,210,.22),
-            transparent 55%
-        ),
-        linear-gradient(
-            180deg,
-            #020a12,
-            #031725,
-            #01060b
-        );
+        rgba(0,8,18,.16) !important;
 }
 
-
-/* Cristal principal */
-
 .track-paper{
+
     position:relative;
 
     width:min(94vw,720px);
+
     height:min(91vh,850px);
 
     overflow:hidden;
@@ -856,15 +1307,14 @@ body{
     opacity:0;
 
     animation:
-        letterGlassIn 1s
+        letterGlassIn
+        1s
         cubic-bezier(.15,.85,.2,1)
         forwards;
 }
 
-
-/* Reflejo */
-
 .track-paper::before{
+
     content:"";
 
     position:absolute;
@@ -890,10 +1340,8 @@ body{
     opacity:.7;
 }
 
-
-/* Brillo inferior */
-
 .track-paper::after{
+
     content:"";
 
     position:absolute;
@@ -915,7 +1363,6 @@ body{
 
     pointer-events:none;
 }
-
 
 @keyframes letterGlassIn{
 
@@ -952,7 +1399,7 @@ body{
 
 
 /* =========================================================
-   CONTENIDO DE LA CARTA
+   CARTA
 ========================================================= */
 
 .track-border,
@@ -961,6 +1408,7 @@ body{
 }
 
 .letter-content{
+
     position:relative;
 
     z-index:10;
@@ -989,6 +1437,12 @@ body{
     scrollbar-color:
         rgba(80,200,255,.5)
         transparent;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        "Times New Roman",
+        serif;
 }
 
 .letter-content h2{
@@ -1000,9 +1454,14 @@ body{
     color:#e9fbff;
 
     font-family:
+        "Cormorant Garamond",
         Georgia,
         "Times New Roman",
         serif;
+
+    font-weight:600;
+
+    letter-spacing:.02em;
 
     font-size:
         clamp(27px,7vw,42px);
@@ -1017,15 +1476,44 @@ body{
 
     color:#eefaff;
 
-    font-size:
-        clamp(16px,4.3vw,20px);
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        "Times New Roman",
+        serif;
 
-    line-height:1.8;
+    font-size:
+        clamp(17px,4.4vw,21px);
+
+    line-height:1.72;
+
+    text-align:justify;
+
+    text-justify:inter-word;
+
+    hyphens:auto;
+
+    -webkit-hyphens:auto;
+
+    letter-spacing:.01em;
 
     white-space:pre-line;
 
     text-shadow:
         0 1px 3px rgba(0,0,0,.8);
+}
+
+.letter-text strong{
+
+    display:block;
+
+    text-align:center;
+
+    margin:8px 0;
+
+    font-weight:600;
+
+    line-height:1.5;
 }
 
 .signature{
@@ -1036,9 +1524,17 @@ body{
 
     color:#65d8ff;
 
-    font-size:24px;
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:26px;
 
     font-style:italic;
+
+    letter-spacing:.02em;
 
     text-shadow:
         0 0 10px rgba(60,200,255,.7);
@@ -1096,22 +1592,18 @@ body{
 
 
 /* =========================================================
-   ESCENA 5 — CORAZÓN FINAL
+   CORAZÓN FINAL
 ========================================================= */
 
 #heart{
+
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(7,60,90,.3),
-            transparent 45%
-        ),
-        #010409;
+    background:transparent !important;
 }
 
 #heartCanvas{
@@ -1148,7 +1640,10 @@ body{
     opacity:0;
 
     animation:
-        finalText 1.2s 5.5s forwards;
+        finalText
+        1.2s
+        5.5s
+        forwards;
 }
 
 @keyframes finalText{
@@ -1204,12 +1699,22 @@ body{
 
 @media(max-width:600px){
 
-    .loading-car{
-        width:75px;
+    .logo{
+        width:88vw;
     }
 
-    .loading-title{
-        margin-bottom:58px;
+    .speedometer{
+
+        width:88vw;
+
+        height:44vw;
+    }
+
+    .loading-drive-car{
+
+        width:58vw;
+
+        bottom:15%;
     }
 
     .hotwheel{
@@ -1221,7 +1726,6 @@ body{
         left:-100px;
     }
 
-    .car2,
     .car4,
     .car5,
     .car6{
@@ -1229,231 +1733,71 @@ body{
     }
 
     .track-paper{
+
         width:94vw;
+
         height:91vh;
 
         padding:18px;
     }
 
     .letter-content{
+
         padding:
-            28px 20px;
-    }
-
-    .neon-letter{
-        font-size:
-            clamp(36px,12vw,72px);
-    }
-}
-
-/* =========================================================
-   TUCSON — FONDO PERMANENTE DE PRINCIPIO A FIN
-   ========================================================= */
-.global-tucson-bg{
-    position:fixed;
-    inset:0;
-    z-index:0;
-    width:100%;
-    height:100dvh;
-    overflow:hidden;
-    pointer-events:none;
-    background:#020812;
-}
-
-.global-tucson-bg img{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center center;
-    opacity: .32;
-    filter:brightness(.48) contrast(1.12) saturate(.82);
-    transform:scale(1.04);
-}
-
-.global-tucson-overlay{
-    position:absolute;
-    inset:0;
-    background:
-        linear-gradient(
-            180deg,
-            rgba(0,5,12,.34) 0%,
-            rgba(0,12,22,.22) 45%,
-            rgba(0,3,9,.62) 100%
-        ),
-        radial-gradient(
-            circle at center,
-            transparent 15%,
-            rgba(0,0,0,.32) 100%
-        );
-}
-
-/* Todas las escenas quedan por encima del fondo */
-.scene{
-    z-index:10;
-}
-
-/* El fondo anterior de las escenas deja de ocultar al Tucson */
-#intro,
-#loading,
-#love,
-#letter,
-#heart{
-    background:transparent !important;
-}
-
-/* La carga conserva contraste sin tapar completamente el Tucson */
-#loading .loading-overlay{
-    background:
-        radial-gradient(
-            circle at center,
-            transparent 8%,
-            rgba(0,0,0,.22) 52%,
-            rgba(0,0,0,.62) 100%
-        );
-}
-
-/* La carta mantiene el efecto cristal, pero permite ver el Tucson */
-#letter{
-    background:
-        rgba(0,8,18,.16) !important;
-}
-
-/* =========================================================
-   CARTA — TIPOGRAFÍA ELEGANTE Y TEXTO JUSTIFICADO
-   ========================================================= */
-.letter-content{
-    font-family:
-        "Cormorant Garamond",
-        Georgia,
-        "Times New Roman",
-        serif;
-}
-
-.letter-content h2{
-    font-family:
-        "Cormorant Garamond",
-        Georgia,
-        "Times New Roman",
-        serif;
-    font-weight:600;
-    letter-spacing:.02em;
-}
-
-.letter-text{
-    text-align:justify;
-    text-justify:inter-word;
-    hyphens:auto;
-    -webkit-hyphens:auto;
-    font-family:
-        "Cormorant Garamond",
-        Georgia,
-        "Times New Roman",
-        serif;
-    font-size:clamp(17px,4.4vw,21px);
-    line-height:1.72;
-    letter-spacing:.01em;
-}
-
-.letter-text strong{
-    display:block;
-    text-align:center;
-    margin:8px 0;
-    font-weight:600;
-    line-height:1.5;
-}
-
-.signature{
-    font-family:
-        "Cormorant Garamond",
-        Georgia,
-        "Times New Roman",
-        serif;
-    font-size:26px;
-    letter-spacing:.02em;
-}
-
-/* En pantallas pequeñas, mejorar lectura y márgenes */
-@media(max-width:600px){
-    .global-tucson-bg img{
-        object-position:center center;
-        opacity:.34;
-    }
-
-    .letter-content{
-        padding:28px 22px 24px;
+            28px 22px 24px;
     }
 
     .letter-text{
+
         font-size:18px;
+
         line-height:1.68;
+
         text-align:justify;
     }
-}
 
+    .neon-letter{
 
-/* Zoom lento y casi imperceptible del Tucson durante toda la experiencia */
-.global-tucson-bg img{
-    animation:tucsonSlowZoom 18s ease-in-out infinite alternate;
-    transform-origin:center center;
-}
-
-@keyframes tucsonSlowZoom{
-    0%{
-        transform:scale(1.035);
+        font-size:
+            clamp(36px,12vw,72px);
     }
-    100%{
-        transform:scale(1.10);
+
+    .neon-message{
+        gap:18px;
+    }
+
+    .neon-line{
+        gap:10px;
     }
 }
-
-
-/* =========================================================
-   VELOCÍMETRO 0–100 KM/H Y ARRANQUE DEL TUCSON
-========================================================= */
-.speedometer-container{position:relative;z-index:30;width:min(92vw,520px);display:flex;flex-direction:column;align-items:center;text-align:center}
-.speed-title{margin-bottom:18px;font:900 clamp(16px,4vw,24px) Arial Black,Arial,sans-serif;letter-spacing:.16em;color:#eafaff;text-shadow:0 0 8px #21bfff,0 0 22px rgba(33,191,255,.55)}
-.speedometer{position:relative;width:min(76vw,360px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(5,25,38,.94) 0 48%,rgba(3,12,20,.9) 49% 72%,rgba(0,0,0,.7) 73%);border:2px solid rgba(110,220,255,.55);box-shadow:0 0 15px rgba(40,190,255,.55),0 0 55px rgba(20,150,220,.25),inset 0 0 35px rgba(0,0,0,.85)}
-.speedometer:before{content:"";position:absolute;inset:8%;border-radius:50%;border:1px solid rgba(130,225,255,.18)}
-.speed-ring{position:absolute;left:8%;right:8%;top:8%;height:84%;border-radius:50% 50% 0 0;border:4px solid rgba(75,205,255,.18);border-bottom:none;border-top-color:#4fd4ff;box-shadow:0 0 12px rgba(50,200,255,.45)}
-.tick{position:absolute;color:#aeeaff;font:bold clamp(12px,3vw,17px) Arial,sans-serif;text-shadow:0 0 8px rgba(60,205,255,.8)}
-.t0{left:8%;bottom:18%}.t20{left:15%;top:40%}.t40{left:30%;top:15%}.t60{right:30%;top:15%}.t80{right:15%;top:40%}.t100{right:8%;bottom:18%}
-.speed-needle{position:absolute;left:50%;top:50%;width:40%;height:5px;transform-origin:0 50%;transform:rotate(-90deg);transition:transform .08s linear;z-index:5}
-.speed-needle span{position:absolute;right:0;top:50%;width:100%;height:4px;transform:translateY(-50%);border-radius:10px;background:linear-gradient(90deg,#a8eeff,#22bfff);box-shadow:0 0 8px #21bfff,0 0 18px rgba(33,191,255,.7)}
-.speed-needle:after{content:"";position:absolute;left:-9px;top:50%;width:18px;height:18px;transform:translateY(-50%);border-radius:50%;background:#062237;border:2px solid #72ddff;box-shadow:0 0 12px #21bfff}
-.speed-center{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-42%);text-align:center}
-.speed-number{font:900 clamp(48px,13vw,78px) Arial Black,Arial,sans-serif;line-height:.9;color:#eaffff;text-shadow:0 0 5px #fff,0 0 14px #28c6ff,0 0 30px rgba(20,165,230,.8)}
-.speed-unit{margin-top:10px;font:13px Arial,sans-serif;letter-spacing:.28em;color:#8cdbf7}
-.speed-ready{margin-top:20px;min-height:20px;font:13px Arial,sans-serif;letter-spacing:.22em;color:#70dfff;opacity:0;transition:opacity .5s;text-shadow:0 0 10px rgba(40,200,255,.8)}
-.speed-ready.visible{opacity:1}
-.start-engine{margin-top:15px;padding:14px 38px;border-radius:50px;border:1px solid rgba(150,230,255,.9);background:rgba(2,25,42,.92);color:white;font:15px Arial Black,Arial,sans-serif;letter-spacing:.16em;cursor:pointer;opacity:0;transform:translateY(12px) scale(.92);pointer-events:none;transition:opacity .45s,transform .45s,box-shadow .3s;box-shadow:0 0 14px rgba(40,195,255,.5),0 0 35px rgba(40,195,255,.18)}
-.start-engine.ready{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;animation:enginePulse 1.4s ease-in-out infinite}
-@keyframes enginePulse{50%{box-shadow:0 0 22px rgba(40,205,255,.85),0 0 50px rgba(40,195,255,.35)}}
-.loading-drive-car{position:absolute;z-index:35;left:-30%;bottom:13%;width:min(42vw,260px);height:auto;opacity:0;pointer-events:none;filter:drop-shadow(0 10px 8px rgba(0,0,0,.8)) drop-shadow(0 0 14px rgba(60,200,255,.5))}
-.loading-drive-car.drive{animation:tucsonDrive 1.8s cubic-bezier(.15,.72,.18,1) forwards}
-@keyframes tucsonDrive{0%{left:-30%;opacity:0;transform:scale(.88)}8%{opacity:1}48%{transform:scale(1.02) translateY(-3px)}100%{left:110%;opacity:1;transform:scale(1.08)}}
-.global-tucson-bg img{animation:tucsonSlowZoom 18s ease-in-out infinite alternate;transform-origin:center center}
-@keyframes tucsonSlowZoom{0%{transform:scale(1.035)}100%{transform:scale(1.10)}}
-#heart{background:transparent !important}
-@media(max-width:600px){.speedometer{width:min(82vw,330px)}.loading-drive-car{width:58vw;bottom:15%}}
 
 </style>
 </head>
 
 <body>
 
-<!-- TUCSON: FONDO PERMANENTE DURANTE TODA LA EXPERIENCIA -->
-<div class="global-tucson-bg" aria-hidden="true">
-    <img src="tucson.png" alt="">
-    <div class="global-tucson-overlay"></div>
-</div>
 
+<!-- =====================================================
+     TUCSON — FONDO PERMANENTE
+===================================================== -->
+
+<div
+    class="global-tucson-bg"
+    aria-hidden="true">
+
+    <img
+        src="tucson.png"
+        alt="">
+
+    <div
+        class="global-tucson-overlay">
+    </div>
+
+</div>
 
 
 <!-- =====================================================
      CORAZONES FLOTANTES
-     ESTÁN PRESENTES DURANTE TODA LA EXPERIENCIA
 ===================================================== -->
 
 <div
@@ -1476,14 +1820,13 @@ body{
         src="logo.png"
         class="logo"
         id="logo"
-        alt="Hot Wheels"
-    >
+        alt="Hot Wheels">
 
 </section>
 
 
 <!-- =====================================================
-     ESCENA 2 — CARGA
+     ESCENA 2 — VELOCÍMETRO
 ===================================================== -->
 
 <section
@@ -1492,31 +1835,101 @@ body{
 
     <div class="loading-overlay"></div>
 
-    <img src="hotwheels.png" class="loading-drive-car" id="loadingDriveCar" alt="Hot Wheels">
 
-        <div class="speedometer-container">
-            <div class="speed-title">PREPARANDO EL MOTOR</div>
+    <!-- AUTO HOT WHEELS QUE ARRANCA -->
 
-            <div class="speedometer">
-                <div class="speed-ring"></div>
-                <span class="tick t0">0</span>
-                <span class="tick t20">20</span>
-                <span class="tick t40">40</span>
-                <span class="tick t60">60</span>
-                <span class="tick t80">80</span>
-                <span class="tick t100">100</span>
+    <img
+        src="hotwheels.png"
+        class="loading-drive-car"
+        id="loadingDriveCar"
+        alt="Hot Wheels">
 
-                <div class="speed-needle" id="speedNeedle"><span></span></div>
 
-                <div class="speed-center">
-                    <div class="speed-number" id="speedNumber">0</div>
-                    <div class="speed-unit">KM/H</div>
-                </div>
+    <div class="speedometer-container">
+
+
+        <div class="speed-title">
+            PREPARANDO EL MOTOR
+        </div>
+
+
+        <div class="speedometer">
+
+            <div class="speed-ring"></div>
+
+
+            <span class="tick t0">
+                0
+            </span>
+
+            <span class="tick t20">
+                20
+            </span>
+
+            <span class="tick t40">
+                40
+            </span>
+
+            <span class="tick t60">
+                60
+            </span>
+
+            <span class="tick t80">
+                80
+            </span>
+
+            <span class="tick t100">
+                100
+            </span>
+
+
+            <div
+                class="speed-needle"
+                id="speedNeedle">
+
+                <span></span>
+
             </div>
 
-            <div class="speed-ready" id="speedReady">MOTOR LISTO</div>
-            <button class="start-engine" id="startEngine" disabled>ARRANCAR</button>
+
+            <div class="speed-center">
+
+                <div
+                    class="speed-number"
+                    id="speedNumber">
+
+                    0
+
+                </div>
+
+                <div class="speed-unit">
+                    KM/H
+                </div>
+
+            </div>
+
         </div>
+
+
+        <div
+            class="speed-ready"
+            id="speedReady">
+
+            MOTOR LISTO
+
+        </div>
+
+
+        <button
+            class="start-engine"
+            id="startEngine"
+            disabled>
+
+            ARRANCAR
+
+        </button>
+
+    </div>
 
 </section>
 
@@ -1529,8 +1942,11 @@ body{
     id="love"
     class="scene">
 
+
     <div class="love-title">
+
         Feliz 30 día de los carrito Hot Wheels 💙
+
     </div>
 
 
@@ -1540,58 +1956,40 @@ body{
     </div>
 
 
-    <!-- CARRO 1: IZQUIERDA → DERECHA -->
-
     <img
         src="carro1.png"
         class="hotwheel car1"
-        alt="Hot Wheels"
-    >
+        alt="Hot Wheels">
 
-
-    <!-- CARRO 2: DERECHA → IZQUIERDA -->
 
     <img
         src="carro2.png"
         class="hotwheel car2"
-        alt="Hot Wheels"
-    >
+        alt="Hot Wheels">
 
-
-    <!-- CARRO 3: IZQUIERDA → DERECHA -->
 
     <img
         src="carro3.png"
         class="hotwheel car3"
-        alt="Hot Wheels"
-    >
+        alt="Hot Wheels">
 
-
-    <!-- CARRO 4: DERECHA → IZQUIERDA -->
 
     <img
         src="carro4.png"
         class="hotwheel car4"
-        alt="Hot Wheels"
-    >
+        alt="Hot Wheels">
 
-
-    <!-- CARRO 5: DERECHA → IZQUIERDA -->
 
     <img
         src="carro5.png"
         class="hotwheel car5"
-        alt="Hot Wheels"
-    >
+        alt="Hot Wheels">
 
-
-    <!-- CARRO 6: DERECHA → IZQUIERDA -->
 
     <img
         src="carro6.png"
         class="hotwheel car6"
-        alt="Hot Wheels"
-    >
+        alt="Hot Wheels">
 
 
     <button
@@ -1606,14 +2004,16 @@ body{
 
 
 <!-- =====================================================
-     ESCENA 4 — CARTA GLASS
+     ESCENA 4 — CARTA
 ===================================================== -->
 
 <section
     id="letter"
     class="scene">
 
+
     <article class="track-paper">
+
 
         <div class="track-border"></div>
 
@@ -1622,28 +2022,46 @@ body{
 
         <div class="letter-content">
 
+
             <h2>
                 Amorcito Mio 💙
             </h2>
-            
+
+
             <div class="letter-text">
 
-Feliz día de los carritos. 💙
+Feliz 30 de septiembre. 💙
 
-Cuando termine este pequeño detalle, quisiera que se lleve algo mucho más importante que este regalo.
-Quisiera que, cada vez que vuelva a verlo, recuerde que hubo alguien que se detuvo un momento para pensar en usted, en su sonrisa, en su forma de ser y en todo aquello que le hace tan especial para mi.
+Y cuando termine esta pequeña historia, quisiera que se lleve algo mucho más importante que este regalo.
+
+Quisiera que, cada vez que vuelva a verla, recuerde que hubo alguien que se detuvo un momento para pensar en usted, en su sonrisa, en su forma de ser y en todo aquello que la hace tan especial para él.
+
 Quizás nunca encuentre las palabras perfectas para explicar todo lo que siento, porque hay sentimientos que simplemente parecen quedarse grandes para cualquier frase. Pero sí puedo decirle que desde que llegó a mi vida, algo cambió. Poco a poco, sin darme cuenta, comenzó a ocupar un espacio en mi corazón que hoy tiene un valor enorme para mí.
+
 Gracias por cada conversación, por cada sonrisa, por los momentos que hemos compartido y por todas esas pequeñas cosas que, con el tiempo, se han convertido en recuerdos que atesoro.
-No sé cuántas páginas nos quedan por escribir ni qué caminos nos llevará a recorrer la vida, pero sí sé que me gustaría seguir llenándolos de momentos a su lado. Seguir conociéndolo, seguir compartiendo, seguir riendo y seguir construyendo recuerdos que algún día podamos mirar hacia atrás y recordar con una sonrisa.
+
+No sé cuántas páginas nos quedan por escribir ni qué caminos nos llevará a recorrer la vida, pero sí sé que me gustaría seguir llenándolos de momentos a su lado. Seguir conociéndola, seguir compartiendo, seguir riendo y seguir construyendo recuerdos que algún día podamos mirar hacia atrás y recordar con una sonrisa.
+
 Porque usted no es simplemente alguien a quien quise dedicarle un regalo.
+
 Es alguien que logró despertar en mí sentimientos que quiero cuidar y conservar.
-Y si algún día vuelve a preguntarse qué significa para mí, vuelva a este pequeño detalle y recuerde algo muy sencillo:
+
+Y si algún día vuelve a preguntarse qué significa para mí, vuelva a esta pequeña historia y recuerde algo muy sencillo:
+
+<strong>
 Usted no fue solamente la inspiración de estas palabras; usted es la razón por la que quise escribirlas.
-Gracias por existir, por ser usted y por permitirme tenerlo en mi vida.
-Feliz 30 de septiembre, amorcito. 💙
+</strong>
+
+Gracias por existir, por ser usted y por permitirme tenerla en mi vida.
+
+Feliz 30 de septiembre, mi amor. 💙
+
+<strong>
 Ojalá este pequeño recuerdo sea apenas una de las muchas historias que todavía nos quedan por vivir juntos.
+</strong>
 
             </div>
+
 
             <div class="signature">
                 Con todo mi amor 💙
@@ -1667,21 +2085,17 @@ Ojalá este pequeño recuerdo sea apenas una de las muchas historias que todaví
 
 <!-- =====================================================
      ESCENA 5 — CORAZÓN FINAL
-
-     EL CORAZÓN SE FORMA ÚNICAMENTE
-     CON LAS PALABRAS:
-
-     "Te"
-     "Quiero"
 ===================================================== -->
 
 <section
     id="heart"
     class="scene">
 
+
     <canvas
         id="heartCanvas">
     </canvas>
+
 
     <div class="final-message">
         Te quiero mucho. 💙
@@ -1712,6 +2126,7 @@ Ojalá este pequeño recuerdo sea apenas una de las muchas historias que todaví
 
 
 <script>
+
 
 /* =========================================================
    ELEMENTOS
@@ -1807,7 +2222,7 @@ createFloatingHearts();
 
 
 /* =========================================================
-   LOGO
+   LOGO → VELOCÍMETRO
 ========================================================= */
 
 document
@@ -1815,11 +2230,6 @@ document
     .addEventListener(
         "click",
         function(){
-
-            /*
-                La música comienza
-                mediante la interacción.
-            */
 
             music.volume = .78;
 
@@ -1835,73 +2245,191 @@ document
                 loading
             );
 
-            
+            startLoading();
 
-                    startLoading();
-
-},
+        },
         {once:true}
     );
 
 
 /* =========================================================
-   CARGA 1 → 100
+   VELOCÍMETRO
+   0 = IZQUIERDA
+   50 = ARRIBA
+   100 = DERECHA
 ========================================================= */
 
 function startLoading(){
 
-    const number = document.getElementById("speedNumber");
-    const needle = document.getElementById("speedNeedle");
-    const ready = document.getElementById("speedReady");
-    const button = document.getElementById("startEngine");
-    const car = document.getElementById("loadingDriveCar");
+    const number =
+        document.getElementById(
+            "speedNumber"
+        );
 
-    const duration = 5200;
-    const start = performance.now();
+    const needle =
+        document.getElementById(
+            "speedNeedle"
+        );
+
+    const ready =
+        document.getElementById(
+            "speedReady"
+        );
+
+    const button =
+        document.getElementById(
+            "startEngine"
+        );
+
+    const car =
+        document.getElementById(
+            "loadingDriveCar"
+        );
+
+
+    const duration =
+        5200;
+
+    const start =
+        performance.now();
+
 
     function animate(now){
-        const progress = Math.min(1,(now-start)/duration);
-        const eased = 1-Math.pow(1-progress,2.2);
-        const speed = progress >= 1 ? 100 : Math.floor(eased*100);
 
-        number.textContent = speed;
-        needle.style.transform = `rotate(${-90+(speed/100)*180}deg)`;
+        const progress =
+            Math.min(
+                1,
+                (now-start)/duration
+            );
+
+
+        const eased =
+            1 -
+            Math.pow(
+                1-progress,
+                2.2
+            );
+
+
+        const speed =
+            progress >= 1
+            ? 100
+            : Math.floor(
+                eased * 100
+            );
+
+
+        number.textContent =
+            speed;
+
+
+        /*
+           0   → 90°
+           50  → 0°
+           100 → -90°
+        */
+
+        const angle =
+            90 -
+            (speed / 100) * 180;
+
+
+        needle.style.transform =
+            `rotate(${angle}deg)`;
+
 
         if(progress < 1){
-            requestAnimationFrame(animate);
+
+            requestAnimationFrame(
+                animate
+            );
+
         }else{
-            ready.classList.add("visible");
-            button.disabled = false;
-            button.classList.add("ready");
+
+            number.textContent =
+                "100";
+
+            needle.style.transform =
+                "rotate(-90deg)";
+
+            ready.classList.add(
+                "visible"
+            );
+
+            button.disabled =
+                false;
+
+            button.classList.add(
+                "ready"
+            );
         }
     }
 
-    button.onclick = function(){
-        if(button.disabled) return;
 
-        button.disabled = true;
-        button.classList.remove("ready");
-        ready.textContent = "¡ARRANCANDO!";
-        ready.classList.add("visible");
+    button.onclick =
+        function(){
 
-        car.classList.remove("drive");
-        void car.offsetWidth;
-        car.classList.add("drive");
+            if(button.disabled)
+                return;
 
-        setTimeout(function(){
-            showScene(love);
-            createNeonMessage();
-            car.classList.remove("drive");
-        },1850);
-    };
 
-    requestAnimationFrame(animate);
+            button.disabled =
+                true;
+
+            button.classList.remove(
+                "ready"
+            );
+
+
+            ready.textContent =
+                "¡ARRANCANDO!";
+
+
+            ready.classList.add(
+                "visible"
+            );
+
+
+            car.classList.remove(
+                "drive"
+            );
+
+
+            void car.offsetWidth;
+
+
+            car.classList.add(
+                "drive"
+            );
+
+
+            setTimeout(
+                function(){
+
+                    showScene(
+                        love
+                    );
+
+                    createNeonMessage();
+
+                    car.classList.remove(
+                        "drive"
+                    );
+
+                },
+                1850
+            );
+        };
+
+
+    requestAnimationFrame(
+        animate
+    );
 }
 
 
 /* =========================================================
    TE QUIERO MUCHO
-   LETRA POR LETRA
 ========================================================= */
 
 function createNeonMessage(){
@@ -1910,6 +2438,7 @@ function createNeonMessage(){
         document.getElementById(
             "neonMessage"
         );
+
 
     container.innerHTML =
         "";
@@ -1933,6 +2462,7 @@ function createNeonMessage(){
                     "div"
                 );
 
+
             line.className =
                 "neon-line";
 
@@ -1945,20 +2475,25 @@ function createNeonMessage(){
                             "span"
                         );
 
+
                     span.className =
                         "neon-letter";
 
+
                     span.textContent =
                         letter;
+
 
                     span.style.setProperty(
                         "--delay",
                         delay + "s"
                     );
 
+
                     line.appendChild(
                         span
                     );
+
 
                     delay += .12;
 
@@ -1969,6 +2504,7 @@ function createNeonMessage(){
             container.appendChild(
                 line
             );
+
 
             delay += .25;
 
@@ -2060,7 +2596,9 @@ const ctx =
 
 
 let W = 0;
+
 let H = 0;
+
 let DPR = 1;
 
 let particles = [];
@@ -2079,6 +2617,7 @@ function resizeCanvas(){
             window.devicePixelRatio || 1,
             2
         );
+
 
     W =
         window.innerWidth;
@@ -2110,6 +2649,7 @@ function resizeCanvas(){
         0
     );
 }
+
 
 resizeCanvas();
 
@@ -2167,7 +2707,7 @@ function heartPoint(
 
 
 /* =========================================================
-   CREAR CORAZÓN
+   CREAR CORAZÓN FINAL
 ========================================================= */
 
 function createFinalHeart(){
@@ -2282,9 +2822,13 @@ function createFinalHeart(){
                 targetY +
                 (Math.random()-.5)*9,
 
+
             /*
-                ÚNICAMENTE:
-                TE / QUIERO
+               SOLAMENTE:
+               TE / QUIERO
+
+               La separación adicional
+               evita que se vea montado.
             */
 
             text:
@@ -2292,9 +2836,11 @@ function createFinalHeart(){
                 ? "Te"
                 : "Quiero",
 
+
             size:
                 7 +
                 Math.random()*3.5,
+
 
             delay:
                 Math.random()*1300
@@ -2323,6 +2869,7 @@ function createFinalHeart(){
 
         ctx.fillStyle =
             "rgba(1,4,9,.34)";
+
 
         ctx.fillRect(
             0,
@@ -2381,14 +2928,28 @@ function createFinalHeart(){
                     .95 * ease;
 
 
+                /*
+                   Tamaño ligeramente menor
+                   para que exista más aire
+                   entre las palabras.
+                */
+
                 const wordScale =
-                    particle.text === "Quiero" ? .90 : 1;
+                    particle.text === "Quiero"
+                    ? .84
+                    : .92;
+
 
                 ctx.font =
-                    `700 ${particle.size * wordScale}px Arial`;
+                    `700 ${
+                        particle.size *
+                        wordScale
+                    }px Arial`;
+
 
                 ctx.textAlign =
                     "center";
+
 
                 ctx.textBaseline =
                     "middle";
@@ -2421,6 +2982,7 @@ function createFinalHeart(){
         ctx.globalAlpha =
             1;
 
+
         ctx.shadowBlur =
             0;
 
@@ -2438,11 +3000,20 @@ function createFinalHeart(){
 }
 
 
-/* Transición logo inicial → velocímetro: gestionada por el handler del logo. */
+/* =========================================================
+   FUNCIÓN AUXILIAR
+========================================================= */
+
 function openSpeedometer(){
-    showScene(loading);
+
+    showScene(
+        loading
+    );
+
     startLoading();
+
 }
+
 </script>
 
 </body>
